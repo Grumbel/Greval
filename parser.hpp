@@ -3,6 +3,8 @@
 
 #include "lexer.hpp"
 
+class Expr;
+
 class Parser
 {
 private:
@@ -11,12 +13,12 @@ private:
 
 public:
   Parser(Lexer& lexer);
-  void parse();
+  Expr* parse();
 
 private:
-  void term();
-  void expr();
-  void factor();
+  Expr* term();
+  Expr* expr();
+  Expr* factor();
   void match(Token::Type token_type);
 
   void error(const std::string& msg);

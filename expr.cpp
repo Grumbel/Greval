@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdlib.h>
+#include <boost/scoped_ptr.hpp>
 
+#include "syntax_tree.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
 
@@ -28,7 +30,8 @@ int main(int argc, char** argv)
       else
       {
         Parser parser(lexer);
-        parser.parse();
+        boost::scoped_ptr<Expr> expr(parser.parse());
+        std::cout << expr->eval() << std::endl;
       }
     }
     catch(const std::exception& err)

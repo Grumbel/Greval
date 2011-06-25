@@ -1,6 +1,7 @@
 #include <stdexcept>
 
 #include "lexer.hpp"
+#include "syntax_tree.hpp"
 
 #include "parser.hpp"
 
@@ -10,77 +11,86 @@ Parser::Parser(Lexer& lexer) :
 {  
 }
 
-void
+Expr*
 Parser::parse()
 {
   next_token();
-  expr();
+  return expr();
 }
 
-void
+Expr*
 Parser::expr()
 {
-  term();
+  Expr* lhs = term();
   while(true)
   {
     switch(get_token_type())
     {
       case Token::kPlus:
         next_token();
-        term();
+        lhs = new Plus(lhs, term());
         break;
 
       case Token::kMinus:
         next_token();
-        term();
+        lhs = new Minus(lhs, term());
         break;
 
       default:
-        return;
+        return lhs;
     }
   }
+  return lhs;
 }
 
-void
+Expr*
 Parser::term()
 {
-  factor();
+  Expr* lhs = factor();
   while(true)
   {
     switch(get_token_type())
     {
       case Token::kMult: 
         next_token();
-        factor();
+        lhs = new Mult(lhs, factor());
         break;
 
       case Token::kDiv: 
         next_token();
-        factor();
+        lhs = new Div(lhs, factor());
         break;
 
       default:
-        return;
+        return lhs;
     }
   }
+  return lhs;
 }
 
-void
+Expr*
 Parser::factor()
 {
+  Expr* lhs = 0;
+
   switch(get_token_type())
   {
     case Token::kParentLeft:
-      match(Token::kParentLeft); expr(); match(Token::kParentRight); 
+      match(Token::kParentLeft);
+      lhs = expr(); 
+      match(Token::kParentRight); 
       break;
 
     case Token::kInteger:
+      lhs = new Integer(get_token().get_integer());
       next_token();
       break;
 
     default:
       throw std::runtime_error("syntax error");
   }
+  
+  return lhs;
 }
 
 void
