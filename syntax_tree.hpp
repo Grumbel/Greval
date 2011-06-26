@@ -113,6 +113,25 @@ private:
   Integer& operator=(const Integer&);
 };
 
+class Real : public Expr
+{
+  float m_value;
+
+public:
+  Real(float value) :
+    m_value(value)
+  {}
+
+  float eval() const
+  {
+    return m_value;
+  }
+
+private:
+  Real(const Real&);
+  Real& operator=(const Real&);
+};
+
 #endif
 
 /* EOF */

@@ -43,13 +43,25 @@ Lexer::get_token()
   int c;
   while((c = get_char()) != -1)
   {
-    if (isdigit(c)) // number
+    if (isdigit(c) || c == '.') // number
     {
+      bool real = false;
+
+      if (c == '.')
+      {
+        real = true;
+      }
+
       std::string str;
       str += c;
       while((c = get_char()) != -1)
       {
-        if (!isdigit(c))
+        if (c == '.' && !real)
+        {
+          real = true;
+          str += c;
+        }
+        else if (!isdigit(c))
         {
           unget_char();
           break;
@@ -59,7 +71,15 @@ Lexer::get_token()
           str += c;
         }
       }
-      return Token::integer(atoi(str.c_str()));
+
+      if (real)
+      {
+        return Token::real(atof(str.c_str()));
+      }
+      else
+      {
+        return Token::integer(atoi(str.c_str()));
+      }
     }
     else if (isalpha(c)) // 
     {

@@ -86,6 +86,11 @@ Parser::factor()
       next_token();
       break;
 
+    case Token::kReal:
+      lhs = new Real(get_token().get_real());
+      next_token();
+      break;
+
     default:
       throw std::runtime_error("syntax error");
   }
