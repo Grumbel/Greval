@@ -136,6 +136,67 @@ Value::operator>=(const Value& rhs) const
 }
 
 Value
+Value::operator==(const Value& rhs) const
+{
+  return Value::integer(this->get_real() == rhs.get_real());
+}
+
+Value
+Value::operator!=(const Value& rhs) const
+{
+  return Value::integer(this->get_real() != rhs.get_real());
+}
+/*
+Value
+Value::operator&&(const Value& rhs) const
+{
+}
+
+Value
+Value::operator||(const Value& rhs) const
+{
+}
+*/
+Value
+Value::operator&(const Value& rhs) const
+{
+  if (this->get_type() == kInteger && rhs.get_type() == kInteger)
+  {
+    return Value::integer(m_value.integer & rhs.m_value.integer);
+  }
+  else
+  {
+    throw std::runtime_error("illegal operation & on Real");
+  }
+}
+
+Value
+Value::operator^(const Value& rhs) const
+{
+  if (this->get_type() == kInteger && rhs.get_type() == kInteger)
+  {
+    return Value::integer(m_value.integer ^ rhs.m_value.integer);
+  }
+  else
+  {
+    throw std::runtime_error("illegal operation ^ on Real");
+  }
+}
+
+Value
+Value::operator|(const Value& rhs) const
+{
+  if (this->get_type() == kInteger && rhs.get_type() == kInteger)
+  {
+    return Value::integer(m_value.integer | rhs.m_value.integer);
+  }
+  else
+  {
+    throw std::runtime_error("illegal operation | on Real");
+  }
+}
+
+Value
 Value::operator~() const
 {
   switch(this->get_type())

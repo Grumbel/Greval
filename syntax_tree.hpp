@@ -117,6 +117,111 @@ private:
   Modulo& operator=(const Modulo&);
 };
 
+class BitwiseAND : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  BitwiseAND(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() & m_rhs->eval();
+  }
+
+private:
+  BitwiseAND(const BitwiseAND&);
+  BitwiseAND& operator=(const BitwiseAND&);
+};
+
+class BitwiseXOR : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  BitwiseXOR(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() ^ m_rhs->eval();
+  }
+
+private:
+  BitwiseXOR(const BitwiseXOR&);
+  BitwiseXOR& operator=(const BitwiseXOR&);
+};
+
+class BitwiseOR : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  BitwiseOR(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() | m_rhs->eval();
+  }
+
+private:
+  BitwiseOR(const BitwiseOR&);
+  BitwiseOR& operator=(const BitwiseOR&);
+};
+
+class Equal : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  Equal(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() == m_rhs->eval();
+  }
+
+private:
+  Equal(const Equal&);
+  Equal& operator=(const Equal&);
+};
+
+class NotEqual : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  NotEqual(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() != m_rhs->eval();
+  }
+
+private:
+  NotEqual(const NotEqual&);
+  NotEqual& operator=(const NotEqual&);
+};
+
 class LargerThen : public Expr
 {
   boost::scoped_ptr<Expr> m_lhs;

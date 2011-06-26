@@ -21,7 +21,7 @@ Parser::parse()
 Expr*
 Parser::expr()
 {
-  return relational_expr();
+  return bitwise_or();
 }
 
 Expr*
@@ -39,25 +39,82 @@ Parser::logical_and()
 Expr* 
 Parser::bitwise_or()
 {
-  return 0;
+  Expr* lhs = bitwise_xor();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kBitwiseOR:
+        next_token();
+        lhs = new BitwiseOR(lhs, bitwise_xor());
+        break;
+                
+      default:
+        return lhs;
+    }
+  }
 }
 
 Expr*
 Parser::bitwise_xor()
 {
-  return 0;
+  Expr* lhs = bitwise_and();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kBitwiseXOR:
+        next_token();
+        lhs = new BitwiseXOR(lhs, bitwise_and());
+        break;
+                
+      default:
+        return lhs;
+    }
+  }
 }
 
 Expr*
 Parser::bitwise_and()
 {
-  return 0;
+  Expr* lhs = equality_expr();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kBitwiseAND:
+        next_token();
+        lhs = new BitwiseAND(lhs, equality_expr());
+        break;
+                
+      default:
+        return lhs;
+    }
+  }
 }
 
 Expr*
 Parser::equality_expr()
 {
-  return 0;
+  Expr* lhs = relational_expr();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kEqual:
+        next_token();
+        lhs = new Equal(lhs, relational_expr());
+        break;
+
+      case Token::kNotEqual:
+        next_token();
+        lhs = new NotEqual(lhs, relational_expr());
+        break;
+                
+      default:
+        return lhs;
+    }
+  }
 }
 
 Expr*
@@ -92,7 +149,6 @@ Parser::relational_expr()
         return lhs;
     }
   }
-  return lhs;
 }
 
 Expr*
@@ -117,7 +173,6 @@ Parser::shift_expr()
         return lhs;
     }
   }
-  return lhs;
 }
 
 Expr*
@@ -142,7 +197,6 @@ Parser::additive_expr()
         return lhs;
     }
   }
-  return lhs;
 }
 
 Expr*
@@ -172,7 +226,6 @@ Parser::multiplicative_expr()
         return lhs;
     }
   }
-  return lhs;
 }
 
 Expr* 
