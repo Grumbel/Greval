@@ -2,3 +2,4 @@
 *.o
 expr
 .sconsign.dblite
+lexer_test

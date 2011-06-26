@@ -43,7 +43,11 @@ Lexer::get_token()
   int c;
   while((c = get_char()) != -1)
   {
-    if (isdigit(c) || c == '.') // number
+    if (isspace(c))
+    {
+      // ignore
+    }
+    else if (isdigit(c) || c == '.') // number
     {
       bool real = false;
 
