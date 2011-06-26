@@ -91,6 +91,101 @@ Lexer::get_token()
       {
       }
     }
+    else if (c == '=')
+    {
+      if ((c = get_char()) != -1 && c == '=')
+      {
+        return Token::equal();
+      }
+      else
+      {
+        throw std::runtime_error("syntax error");
+      }
+    }
+    else if (c == '!')
+    {
+      if ((c = get_char()) != -1 && c == '=')
+      {
+        return Token::not_equal();
+      }
+      else
+      {
+        unget_char();
+        return Token::logical_not();
+      }
+    }
+    else if (c == '<')
+    {
+      if ((c = get_char()) != -1)
+      {
+        if (c == '=')
+          return Token::smaller_or_equal_then();
+        else if (c == '<')
+          return Token::shift_left();
+        else
+        {
+          unget_char();
+          return Token::smaller_then();
+        }
+      }
+      else
+      {
+        unget_char();
+        return Token::smaller_then();
+      }
+    }
+    else if (c == '>')
+    {
+      if ((c = get_char()) != -1)
+      {
+        if (c == '=')
+        {
+          return Token::larger_or_equal_then();
+        }
+        else if (c == '>')
+        {
+          return Token::shift_right();
+        }
+        else
+        {
+          unget_char();
+          return Token::larger_then();
+        }
+      }
+      else
+      {
+        unget_char();
+        return Token::larger_then();
+      }
+    }
+    else if (c == '|')
+    {
+      if ((c = get_char()) != -1 && c == '|')
+      {
+        return Token::logical_or();
+      }
+      else
+      {
+        unget_char();
+        return Token::bitwise_or();
+      }
+    }
+    else if (c == '^')
+    {
+      return Token::bitwise_xor();
+    }
+    else if (c == '&')
+    {
+      if ((c = get_char()) != -1 && c == '&')
+      {
+        return Token::logical_and();
+      }
+      else
+      {
+        unget_char();
+        return Token::bitwise_and();
+      }
+    }
     else if (c == '+')
     {
       return Token::plus();

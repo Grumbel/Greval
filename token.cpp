@@ -21,7 +21,23 @@ Token::print(std::ostream& os) const
     case kMult:    os << "/"; break;
     case kDiv:     os << "/"; break;
     case kEOF:     os << "EOF"; break;
-    default:       assert(!"never reached");
+    case kModulo:  os << ""; break;
+    case kShiftLeft:    os << "<<"; break;
+    case kShiftRight:   os << ">>"; break;
+    case kBitwiseXOR:   os << "^"; break;
+    case kBitwiseOR:    os << "|"; break;
+    case kBitwiseAND:   os << "&"; break;
+    case kLogicalOR:    os << "||"; break;
+    case kLogicalAND:   os << "&&"; break;
+    case kLogicalNOT:   os << "!"; break;
+    case kLargerThen:   os << ">"; break;
+    case kSmallerThen:  os << "<"; break;
+    case kLargerOrEqualThen:  os << ">="; break;
+    case kSmallerOrEqualThen: os << "<="; break;
+    case kEqual:        os << "=="; break;
+    case kNotEqual:     os << "!="; break;
+    case kParentLeft:   os << "("; break;
+    case kParentRight:  os << ")"; break;
   }
 }
 
