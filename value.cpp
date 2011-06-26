@@ -222,4 +222,16 @@ Value::operator!() const
   }
 }
 
+Value::operator void*() const
+{
+  switch(this->get_type())
+  {
+    case kInteger:
+      return reinterpret_cast<void*>(m_value.integer != 0);
+      
+    case kReal:
+      return reinterpret_cast<void*>(m_value.real != 0);
+  }
+}
+
 /* EOF */

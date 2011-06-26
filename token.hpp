@@ -25,6 +25,8 @@ public:
     kLogicalAND,
     kLargerThen,
     kSmallerThen,
+    kQuestionmark,
+    kColon,
     kLargerOrEqualThen,
     kSmallerOrEqualThen,
     kEqual,
@@ -100,6 +102,9 @@ public:
 
   static Token equal() { return Token(kEqual); }
   static Token not_equal() { return Token(kNotEqual); }
+
+  static Token questionmark() { return Token(kQuestionmark); }
+  static Token colon() { return Token(kColon); }
 
   static Token integer(int num) { return Token(kInteger, num); }
   static Token real(float num)  { return Token(kReal,    num); }

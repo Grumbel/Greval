@@ -88,6 +88,8 @@ public:
 
   Value operator~() const;
   Value operator!() const;
+
+  operator void*() const;
 };
 
 std::ostream& operator<<(std::ostream& os, const Value& value);

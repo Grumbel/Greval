@@ -217,6 +217,14 @@ Lexer::get_token()
     {
       return Token::parent_right();
     }
+    else if (c == '?')
+    {
+      return Token::questionmark();
+    }
+    else if (c == ':')
+    {
+      return Token::colon();
+    }
     else
     {
       throw std::runtime_error("syntax error");

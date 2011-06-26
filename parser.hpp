@@ -17,6 +17,7 @@ public:
 
 private:
   Expr* expr();
+  Expr* conditional_expr();
   Expr* logical_or();
   Expr* logical_and();
   Expr* bitwise_or();

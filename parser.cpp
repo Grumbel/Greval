@@ -21,7 +21,31 @@ Parser::parse()
 Expr*
 Parser::expr()
 {
-  return bitwise_or();
+  return conditional_expr();
+}
+
+Expr*
+Parser::conditional_expr()
+{
+  Expr* expr = bitwise_xor();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kQuestionmark:
+        {
+          next_token();
+          Expr* lhs = this->expr();
+          match(Token::kColon);
+          Expr* rhs = bitwise_xor();
+          expr = new Condition(expr, lhs, rhs);
+        }
+        break;
+                
+      default:
+        return expr;
+    }
+  }
 }
 
 Expr*

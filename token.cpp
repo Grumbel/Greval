@@ -39,6 +39,8 @@ Token::print(std::ostream& os) const
     case kNotEqual:     os << "!="; break;
     case kParentLeft:   os << "("; break;
     case kParentRight:  os << ")"; break;
+    case kQuestionmark:   os << "?"; break;
+    case kColon:  os << ":"; break;
   }
 }
 

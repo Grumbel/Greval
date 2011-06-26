@@ -380,6 +380,33 @@ public:
     return ~m_rhs->eval();
   }
 };
+
+
+class Condition : public Expr
+{
+  boost::scoped_ptr<Expr> m_expr;
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  Condition(Expr* expr, Expr* lhs, Expr* rhs) :
+    m_expr(expr),
+    m_lhs(lhs),
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    if (m_expr->eval())
+    {
+      return m_lhs->eval();
+    }
+    else
+    {
+      return m_rhs->eval();
+    }
+  }   
+};
 
 class Integer : public Expr
 {
