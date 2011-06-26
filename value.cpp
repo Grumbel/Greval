@@ -1,5 +1,6 @@
 #include <math.h>
 #include <ostream>
+#include <stdexcept>
 
 #include "value.hpp"
 
@@ -81,6 +82,58 @@ Value::operator%(const Value& rhs) const
   else
   {
     return Value::real(fmodf(this->get_real(), rhs.get_real()));
+  }
+}
+
+Value
+Value::operator<<(const Value& rhs) const
+{
+  if (this->get_type() == kInteger && rhs.get_type() == kInteger)
+  {
+    return Value::integer(m_value.integer << rhs.m_value.integer);
+  }
+  else
+  {
+    throw std::runtime_error("illegal operation << on Real");
+  }
+}
+
+Value
+Value::operator>>(const Value& rhs) const
+{
+  if (this->get_type() == kInteger && rhs.get_type() == kInteger)
+  {
+    return Value::integer(m_value.integer >> rhs.m_value.integer);
+  }
+  else
+  {
+    throw std::runtime_error("illegal operation >> on Real");
+  }
+}
+
+Value
+Value::operator~() const
+{
+  switch(this->get_type())
+  {
+    case kInteger:
+      return Value::integer(~m_value.integer);
+      
+    case kReal:
+      throw std::runtime_error("illegal operation ~ on Real");
+  }
+}
+
+Value
+Value::operator!() const
+{
+  switch(this->get_type())
+  {
+    case kInteger:
+      return Value::integer(!m_value.integer);
+      
+    case kReal:
+      return Value::integer(!m_value.real);
   }
 }
 

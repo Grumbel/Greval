@@ -21,19 +21,67 @@ Parser::parse()
 Expr*
 Parser::expr()
 {
-  Expr* lhs = term();
+  return shift_expr();
+}
+
+Expr*
+Parser::logical_or()
+{
+  return 0;
+}
+
+Expr*
+Parser::logical_and()
+{
+  return 0;
+}
+
+Expr* 
+Parser::bitwise_or()
+{
+  return 0;
+}
+
+Expr*
+Parser::bitwise_xor()
+{
+  return 0;
+}
+
+Expr*
+Parser::bitwise_and()
+{
+  return 0;
+}
+
+Expr*
+Parser::equality_expr()
+{
+  return 0;
+}
+
+Expr*
+Parser::relational_expr()
+{
+  return 0;
+}
+
+Expr*
+Parser::shift_expr()
+{
+ Expr* lhs = additive_expr();
   while(true)
   {
     switch(get_token_type())
     {
-      case Token::kPlus:
+      case Token::kShiftLeft:
         next_token();
-        lhs = new Plus(lhs, term());
+        lhs = new ShiftLeft(lhs, additive_expr());
         break;
 
-      case Token::kMinus:
+      case Token::kShiftRight:
         next_token();
-        lhs = new Minus(lhs, term());
+        lhs = new ShiftRight(lhs, additive_expr());
         break;
 
       default:
@@ -44,26 +92,21 @@ Parser::expr()
 }
 
 Expr*
-Parser::term()
+Parser::additive_expr()
 {
-  Expr* lhs = factor();
+  Expr* lhs = multiplicative_expr();
   while(true)
   {
     switch(get_token_type())
     {
-      case Token::kMult: 
+      case Token::kPlus:
         next_token();
-        lhs = new Mult(lhs, factor());
+        lhs = new Plus(lhs, multiplicative_expr());
         break;
 
-      case Token::kDiv: 
+      case Token::kMinus:
         next_token();
-        lhs = new Div(lhs, factor());
-        break;
-        
-      case Token::kModulo: 
-        next_token();
-        lhs = new Modulo(lhs, factor());
+        lhs = new Minus(lhs, multiplicative_expr());
         break;
 
       default:
@@ -71,6 +114,54 @@ Parser::term()
     }
   }
   return lhs;
+}
+
+Expr*
+Parser::multiplicative_expr()
+{
+  Expr* lhs = unary_expr();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kMult: 
+        next_token();
+        lhs = new Mult(lhs, unary_expr());
+        break;
+
+      case Token::kDiv: 
+        next_token();
+        lhs = new Div(lhs, unary_expr());
+        break;
+        
+      case Token::kModulo: 
+        next_token();
+        lhs = new Modulo(lhs, unary_expr());
+        break;
+
+      default:
+        return lhs;
+    }
+  }
+  return lhs;
+}
+
+Expr* 
+Parser::unary_expr()
+{
+  switch(get_token_type())
+  {
+    case Token::kLogicalNOT:
+      next_token();
+      return new LogicalNOT(unary_expr());
+
+    case Token::kBitwiseNOT:
+      next_token();
+      return new BitwiseNOT(unary_expr());
+
+    default:
+      return factor();
+  }
 }
 
 Expr*

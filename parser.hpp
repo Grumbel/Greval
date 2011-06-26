@@ -16,8 +16,18 @@ public:
   Expr* parse();
 
 private:
-  Expr* term();
   Expr* expr();
+  Expr* logical_or();
+  Expr* logical_and();
+  Expr* bitwise_or();
+  Expr* bitwise_xor();
+  Expr* bitwise_and();
+  Expr* equality_expr();
+  Expr* relational_expr();
+  Expr* shift_expr();
+  Expr* additive_expr();
+  Expr* multiplicative_expr();
+  Expr* unary_expr();
   Expr* factor();
   void match(Token::Type token_type);
 

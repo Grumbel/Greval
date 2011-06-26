@@ -116,7 +116,81 @@ private:
   Modulo(const Modulo&);
   Modulo& operator=(const Modulo&);
 };
+
+class ShiftLeft : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
 
+public:
+  ShiftLeft(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() << m_rhs->eval();
+  }
+
+private:
+  ShiftLeft(const ShiftLeft&);
+  ShiftLeft& operator=(const ShiftLeft&);
+};
+
+class ShiftRight : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  ShiftRight(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() >> m_rhs->eval();
+  }
+
+private:
+  ShiftRight(const ShiftRight&);
+  ShiftRight& operator=(const ShiftRight&);
+};
+
+class LogicalNOT : public Expr
+{
+private:
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  LogicalNOT(Expr* rhs) :
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return !m_rhs->eval();
+  }
+};
+
+class BitwiseNOT : public Expr
+{
+private:
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  BitwiseNOT(Expr* rhs) :
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return ~m_rhs->eval();
+  }
+};
+
 class Integer : public Expr
 {
   int m_value;
@@ -154,7 +228,7 @@ private:
   Real(const Real&);
   Real& operator=(const Real&);
 };
-
+
 #endif
 
 /* EOF */
