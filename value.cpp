@@ -112,6 +112,30 @@ Value::operator>>(const Value& rhs) const
 }
 
 Value
+Value::operator<(const Value& rhs) const
+{
+  return Value::integer(this->get_real() < rhs.get_real());
+}
+
+Value
+Value::operator>(const Value& rhs) const
+{
+  return Value::integer(this->get_real() > rhs.get_real());
+}
+
+Value
+Value::operator<=(const Value& rhs) const
+{
+  return Value::integer(this->get_real() <= rhs.get_real());
+}
+
+Value
+Value::operator>=(const Value& rhs) const
+{
+  return Value::integer(this->get_real() >= rhs.get_real());
+}
+
+Value
 Value::operator~() const
 {
   switch(this->get_type())

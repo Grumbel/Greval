@@ -21,7 +21,7 @@ Parser::parse()
 Expr*
 Parser::expr()
 {
-  return shift_expr();
+  return relational_expr();
 }
 
 Expr*
@@ -63,13 +63,42 @@ Parser::equality_expr()
 Expr*
 Parser::relational_expr()
 {
-  return 0;
+  Expr* lhs = shift_expr();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kLargerThen:
+        next_token();
+        lhs = new LargerThen(lhs, shift_expr());
+        break;
+
+      case Token::kSmallerThen:
+        next_token();
+        lhs = new SmallerThen(lhs, shift_expr());
+        break;
+
+      case Token::kLargerOrEqualThen:
+        next_token();
+        lhs = new LargerOrEqualThen(lhs, shift_expr());
+        break;
+
+      case Token::kSmallerOrEqualThen:
+        next_token();
+        lhs = new SmallerOrEqualThen(lhs, shift_expr());
+        break;
+
+      default:
+        return lhs;
+    }
+  }
+  return lhs;
 }
 
 Expr*
 Parser::shift_expr()
 {
- Expr* lhs = additive_expr();
+  Expr* lhs = additive_expr();
   while(true)
   {
     switch(get_token_type())

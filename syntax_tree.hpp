@@ -117,6 +117,91 @@ private:
   Modulo& operator=(const Modulo&);
 };
 
+class LargerThen : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  LargerThen(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() > m_rhs->eval();
+  }
+
+private:
+  LargerThen(const LargerThen&);
+  LargerThen& operator=(const LargerThen&);
+};
+
+class SmallerThen : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  SmallerThen(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() < m_rhs->eval();
+  }
+
+private:
+  SmallerThen(const SmallerThen&);
+  SmallerThen& operator=(const SmallerThen&);
+};
+
+class SmallerOrEqualThen : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  SmallerOrEqualThen(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() <= m_rhs->eval();
+  }
+
+private:
+  SmallerOrEqualThen(const SmallerOrEqualThen&);
+  SmallerOrEqualThen& operator=(const SmallerOrEqualThen&);
+};
+
+class LargerOrEqualThen : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  LargerOrEqualThen(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() >= m_rhs->eval();
+  }
+
+private:
+  LargerOrEqualThen(const LargerOrEqualThen&);
+  LargerOrEqualThen& operator=(const LargerOrEqualThen&);
+};
+
+
 class ShiftLeft : public Expr
 {
   boost::scoped_ptr<Expr> m_lhs;
