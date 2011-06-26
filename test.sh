@@ -20,8 +20,9 @@ function expect_result {
 # expect_fail "./expr" ".5.6.7"
 # expect_fail "./expr" "5 6 7"
 
-expect_result "18" "./expr" "5+6+7"
-expect_result "25" "./expr" "(5+6)+7*2"
-expect_result "7.75" "./expr" "5+11/12*3"
+expect_result "integer:18" "./expr" "5+6+7"
+expect_result "integer:25" "./expr" "(5+6)+7*2"
+expect_result "integer:5" "./expr" "5+11/12*3"
+expect_result "real:7.75" "./expr" "5.0+11.0/12.0*3.0"
 
 # EOF #

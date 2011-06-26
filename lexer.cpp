@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdlib.h>
-#include <iostream>
 #include <stdexcept>
 
 #include "lexer.hpp"
@@ -57,13 +56,13 @@ Lexer::get_token()
       }
 
       std::string str;
-      str += c;
+      str += static_cast<char>(c);
       while((c = get_char()) != -1)
       {
         if (c == '.' && !real)
         {
           real = true;
-          str += c;
+          str += static_cast<char>(c);
         }
         else if (!isdigit(c))
         {
@@ -72,13 +71,13 @@ Lexer::get_token()
         }
         else
         {
-          str += c;
+          str += static_cast<char>(c);
         }
       }
 
       if (real)
       {
-        return Token::real(atof(str.c_str()));
+        return Token::real(static_cast<float>(atof(str.c_str())));
       }
       else
       {
@@ -189,6 +188,10 @@ Lexer::get_token()
     else if (c == '+')
     {
       return Token::plus();
+    }
+    else if (c == '%')
+    {
+      return Token::modulo();
     }
     else if (c == '-')
     {

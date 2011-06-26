@@ -60,6 +60,11 @@ Parser::term()
         next_token();
         lhs = new Div(lhs, factor());
         break;
+        
+      case Token::kModulo: 
+        next_token();
+        lhs = new Modulo(lhs, factor());
+        break;
 
       default:
         return lhs;

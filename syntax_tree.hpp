@@ -3,11 +3,13 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include "value.hpp"
+
 class Expr
 {
 public:
   virtual ~Expr() {}
-  virtual float eval() const =0;
+  virtual Value eval() const =0;
 };
 
 class Plus : public Expr
@@ -21,7 +23,7 @@ public:
     m_rhs(rhs)
   {}
 
-  float eval() const
+  Value eval() const
   {
     return m_lhs->eval() + m_rhs->eval();
   }
@@ -42,7 +44,7 @@ public:
     m_rhs(rhs)
   {}
 
-  float eval() const
+  Value eval() const
   {
     return m_lhs->eval() - m_rhs->eval();
   }
@@ -63,7 +65,7 @@ public:
     m_rhs(rhs)
   {}
 
-  float eval() const
+  Value eval() const
   {
     return m_lhs->eval() * m_rhs->eval();
   }
@@ -84,7 +86,7 @@ public:
     m_rhs(rhs)
   {}
 
-  float eval() const
+  Value eval() const
   {
     return m_lhs->eval() / m_rhs->eval();
   }
@@ -92,6 +94,27 @@ public:
 private:
   Div(const Div&);
   Div& operator=(const Div&);
+};
+
+class Modulo : public Expr
+{
+  boost::scoped_ptr<Expr> m_lhs;
+  boost::scoped_ptr<Expr> m_rhs;
+
+public:
+  Modulo(Expr* lhs, Expr* rhs) :
+    m_lhs(lhs), 
+    m_rhs(rhs)
+  {}
+
+  Value eval() const
+  {
+    return m_lhs->eval() % m_rhs->eval();
+  }
+
+private:
+  Modulo(const Modulo&);
+  Modulo& operator=(const Modulo&);
 };
 
 class Integer : public Expr
@@ -103,9 +126,9 @@ public:
     m_value(value)
   {}
 
-  float eval() const
+  Value eval() const
   {
-    return static_cast<float>(m_value);
+    return Value::integer(m_value);
   }
 
 private:
@@ -122,9 +145,9 @@ public:
     m_value(value)
   {}
 
-  float eval() const
+  Value eval() const
   {
-    return m_value;
+    return Value::real(m_value);
   }
 
 private:
