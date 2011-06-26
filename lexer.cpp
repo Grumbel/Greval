@@ -101,6 +101,10 @@ Lexer::get_token()
         throw std::runtime_error("syntax error");
       }
     }
+    else if (c == '~')
+    {
+      return Token::bitwise_not();
+    }
     else if (c == '!')
     {
       if ((c = get_char()) != -1 && c == '=')

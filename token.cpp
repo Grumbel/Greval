@@ -24,6 +24,7 @@ Token::print(std::ostream& os) const
     case kModulo:  os << ""; break;
     case kShiftLeft:    os << "<<"; break;
     case kShiftRight:   os << ">>"; break;
+    case kBitwiseNOT:   os << "~"; break;
     case kBitwiseXOR:   os << "^"; break;
     case kBitwiseOR:    os << "|"; break;
     case kBitwiseAND:   os << "&"; break;

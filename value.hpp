@@ -7,8 +7,8 @@ class Value
 {
 public:
   enum Type {
-    kReal,
-    kInteger
+    kInteger,
+    kReal
   };
 
 private:

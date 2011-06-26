@@ -16,12 +16,13 @@ public:
     kModulo,
     kShiftLeft,
     kShiftRight,
+    kBitwiseNOT,
     kBitwiseXOR,
     kBitwiseOR,
     kBitwiseAND,
+    kLogicalNOT,
     kLogicalOR,
     kLogicalAND,
-    kLogicalNOT,
     kLargerThen,
     kSmallerThen,
     kLargerOrEqualThen,
@@ -82,6 +83,7 @@ public:
   static Token parent_left()  { return Token(kParentLeft);  }
   static Token parent_right() { return Token(kParentRight); }
 
+  static Token bitwise_not() { return Token(kBitwiseNOT); }
   static Token bitwise_or() { return Token(kBitwiseOR); }
   static Token bitwise_xor() { return Token(kBitwiseXOR); }
   static Token bitwise_and() { return Token(kBitwiseAND); }
