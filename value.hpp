@@ -60,6 +60,8 @@ public:
 
   void print(std::ostream& os) const;
 
+  Value operator-() const;
+
   Value operator+(const Value& rhs) const;
   Value operator-(const Value& rhs) const;
 

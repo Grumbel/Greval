@@ -408,6 +408,22 @@ public:
   }   
 };
 
+class Negate : public Expr
+{
+private:
+  boost::scoped_ptr<Expr> m_expr;
+
+public:
+  Negate(Expr* expr) :
+    m_expr(expr)
+  {}
+
+  Value eval() const
+  {
+    return -m_expr->eval();
+  }
+};
+
 class Integer : public Expr
 {
   int m_value;

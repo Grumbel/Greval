@@ -234,4 +234,17 @@ Value::operator void*() const
   }
 }
 
+Value
+Value::operator-() const
+{
+  switch(this->get_type())
+  {
+    case kInteger:
+      return Value::integer(-m_value.integer);
+      
+    case kReal:
+      return Value::real(-m_value.real);
+  }
+}
+
 /* EOF */

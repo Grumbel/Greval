@@ -265,6 +265,14 @@ Parser::unary_expr()
       next_token();
       return new BitwiseNOT(unary_expr());
 
+    case Token::kMinus:
+      next_token();
+      return new Negate(unary_expr());
+
+    case Token::kPlus:
+      next_token();
+      return unary_expr();
+
     default:
       return factor();
   }
