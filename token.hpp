@@ -14,6 +14,7 @@ public:
     kMinus,
     kMult,
     kDiv,
+    kComma,
     kModulo,
     kShiftLeft,
     kShiftRight,
@@ -143,6 +144,7 @@ public:
 
   static Token questionmark() { return Token(kQuestionmark); }
   static Token colon() { return Token(kColon); }
+  static Token comma() { return Token(kComma); }
 
   static Token integer(int num) { return Token(kInteger, num); }
   static Token real(float num)  { return Token(kReal,    num); }

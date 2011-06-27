@@ -229,6 +229,10 @@ Lexer::get_token()
     {
       return Token::parent_right();
     }
+    else if (c == ',')
+    {
+      return Token::comma();
+    }
     else if (c == '?')
     {
       return Token::questionmark();

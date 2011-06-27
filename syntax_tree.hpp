@@ -2,6 +2,7 @@
 #define HEADER_SYNTAX_TREE_HPP
 
 #include <boost/scoped_ptr.hpp>
+#include <vector>
 
 #include "value.hpp"
 
@@ -428,15 +429,17 @@ class Function : public Expr
 {
 private:
   std::string m_name;
+  std::vector<Expr*> m_args; // FIXME: memleak
 
 public:
-  Function(const std::string& name) :
-    m_name(name)
+  Function(const std::string& name, const std::vector<Expr*>& args) :
+    m_name(name),
+    m_args(args)
   {}
 
   Value eval() const
   {
-    return Value::integer(71); // FIXME: look up the varibale in the environment
+    return Value::integer(m_args.size()); // FIXME: look up the function in the environment
   }
 };
 

@@ -42,6 +42,7 @@ Token::print(std::ostream& os) const
     case kParentRight:  os << ")"; break;
     case kQuestionmark:   os << "?"; break;
     case kColon:  os << ":"; break;
+    case kComma:  os << ","; break;
   }
 }
 

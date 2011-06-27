@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <sstream>
+#include <vector>
 
 #include "lexer.hpp"
 #include "syntax_tree.hpp"
@@ -309,8 +310,24 @@ Parser::primary_expression()
         if (get_token_type() == Token::kParentLeft)
         {
           match(Token::kParentLeft);
+          std::vector<Expr*> args;
+          if (get_token_type() != Token::kParentRight)
+          {
+            while(1)
+            {
+              args.push_back(expr());
+              if (get_token_type() == Token::kComma)
+              {
+                match(Token::kComma);
+              }
+              else
+              {
+                break;
+              }
+            }
+          }
           match(Token::kParentRight); 
-          lhs = new Function(name);
+          lhs = new Function(name, args);
         }
         else
         {
