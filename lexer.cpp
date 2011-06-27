@@ -84,11 +84,23 @@ Lexer::get_token()
         return Token::integer(atoi(str.c_str()));
       }
     }
-    else if (isalpha(c)) // 
+    else if (isalpha(c))
     {
+      std::string str;
+      str += static_cast<char>(c);
       while((c = get_char()) != -1)
       {
+        if (!isalpha(c) && !isdigit(c) && c != '_')
+        {
+          unget_char();
+          break;
+        }
+        else
+        {
+          str += static_cast<char>(c);
+        }
       }
+      return Token::string(str);
     }
     else if (c == '=')
     {

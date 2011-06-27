@@ -11,6 +11,7 @@ Value::print(std::ostream& os) const
   {
     case Value::kReal:    os << "real:" << m_value.real; break;
     case Value::kInteger: os << "integer:" << m_value.integer; break;
+    case Value::kString:  os << "string:\"" << *m_value.string << '"'; break;
   }
 }
 
@@ -206,7 +207,12 @@ Value::operator~() const
       
     case kReal:
       throw std::runtime_error("illegal operation ~ on Real");
+
+    case kString:  
+      throw std::runtime_error("illegal operation ~ on String");
   }
+
+  return Value();
 }
 
 Value
@@ -219,7 +225,12 @@ Value::operator!() const
       
     case kReal:
       return Value::integer(!m_value.real);
+
+    case kString:  
+      throw std::runtime_error("illegal operation ! on String");
   }
+
+  return Value();
 }
 
 Value::operator void*() const
@@ -231,7 +242,12 @@ Value::operator void*() const
       
     case kReal:
       return reinterpret_cast<void*>(m_value.real != 0);
+
+    case kString:  
+      return reinterpret_cast<void*>(!m_value.string->empty());
   }
+
+  return Value();
 }
 
 Value
@@ -244,7 +260,12 @@ Value::operator-() const
       
     case kReal:
       return Value::real(-m_value.real);
+
+    case kString:
+      throw std::runtime_error("illegal operation - on String");
   }
+
+  return Value();
 }
 
 /* EOF */

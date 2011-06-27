@@ -16,6 +16,7 @@ Token::print(std::ostream& os) const
   {
     case kInteger: os << "integer:" << m_value.integer; break;
     case kReal:    os << "real:" << m_value.real; break;
+    case kString:  os << "string:\"" << *m_value.string << "\""; break;
     case kPlus:    os << "+"; break;
     case kMinus:   os << "*"; break;
     case kMult:    os << "/"; break;

@@ -9,6 +9,7 @@ public:
   enum Type {
     kInteger,
     kReal,
+    kString,
     kPlus,
     kMinus,
     kMult,
@@ -56,14 +57,50 @@ public:
     m_value.integer = num;
   }
 
+  Token(Type type, const std::string& str) :
+    m_type(type),
+    m_value()
+  {
+    m_value.string = new std::string(str);
+  }
+
   Token(Type type) :
     m_type(type),
     m_value()
   {}
-  
+
+  Token(const Token& rhs) :
+    m_type(rhs.m_type),
+    m_value(rhs.m_value)
+  {
+    if (rhs.m_type == kString)
+    {
+      m_value.string = new std::string(*rhs.m_value.string);
+    }
+  }
+
+  Token& operator=(const Token& rhs)
+  {
+    if (this != &rhs)
+    {
+      m_type = rhs.m_type;
+
+      if (rhs.m_type == kString)
+      {
+        m_value.string = new std::string(*rhs.m_value.string);
+      }
+      else
+      {
+        m_value = rhs.m_value;
+      }
+    }
+    return *this;
+  }  
+
   Type  get_type() const { return m_type; }
   int   get_integer() const { return m_value.integer; }
   float get_real() const { return m_value.real; }
+  std::string get_string() const { return *m_value.string; }
 
   void print(std::ostream& os) const;
 
@@ -72,6 +109,7 @@ private:
   union {
     int   integer;
     float real;
+    std::string* string;
   } m_value;
 
 public:
@@ -108,6 +146,7 @@ public:
 
   static Token integer(int num) { return Token(kInteger, num); }
   static Token real(float num)  { return Token(kReal,    num); }
+  static Token string(const std::string& str)  { return Token(kString, str); }
 
   static Token eof()            { return Token(kEOF); }
 };
