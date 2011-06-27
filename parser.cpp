@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <sstream>
 
 #include "lexer.hpp"
 #include "syntax_tree.hpp"
@@ -7,7 +8,7 @@
 
 Parser::Parser(Lexer& lexer) :
   m_lexer(lexer),
-  m_current_token()
+  m_tokens()
 {  
 }
 
@@ -274,12 +275,12 @@ Parser::unary_expr()
       return unary_expr();
 
     default:
-      return factor();
+      return primary_expression();
   }
 }
 
 Expr*
-Parser::factor()
+Parser::primary_expression()
 {
   Expr* lhs = 0;
 
@@ -288,7 +289,7 @@ Parser::factor()
     case Token::kParentLeft:
       match(Token::kParentLeft);
       lhs = expr(); 
-      match(Token::kParentRight); 
+      match(Token::kParentRight);
       break;
 
     case Token::kInteger:
@@ -299,6 +300,23 @@ Parser::factor()
     case Token::kReal:
       lhs = new Real(get_token().get_real());
       next_token();
+      break;
+
+    case Token::kString:
+      {
+        std::string name = get_token().get_string();
+        next_token();
+        if (get_token_type() == Token::kParentLeft)
+        {
+          match(Token::kParentLeft);
+          match(Token::kParentRight); 
+          lhs = new Function(name);
+        }
+        else
+        {
+          lhs = new Variable(name);
+        }
+      }
       break;
 
     default:
@@ -317,7 +335,9 @@ Parser::match(Token::Type token_type)
   }
   else
   {
-    error("syntax error");
+    std::ostringstream out;
+    out << "syntax error: expected: " << token_type << " got " << get_token_type();
+    error(out.str());
   }
 }
 
@@ -328,21 +348,33 @@ Parser::error(const std::string& msg)
 }
 
 Token::Type
-Parser::get_token_type()
+Parser::get_token_type(int lookahead)
 {
-  return m_current_token.get_type();
+  return get_token(lookahead).get_type();
 }
 
 Token
-Parser::get_token()
+Parser::get_token(int lookahead)
 {
-  return m_current_token;
+  while (lookahead >= static_cast<int>(m_tokens.size()))
+  {
+    m_tokens.push_back(m_lexer.get_token());
+  }
+  return m_tokens[lookahead];
 }
 
 void
 Parser::next_token()
 {
-  m_current_token = m_lexer.get_token();
+  if (!m_tokens.empty())
+  {
+    m_tokens.pop_front();
+  }
+
+  if (m_tokens.empty())
+  {
+    m_tokens.push_back(m_lexer.get_token());
+  }
 }
 
 /* EOF */

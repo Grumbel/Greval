@@ -1,6 +1,8 @@
 #ifndef HEADER_PARSER_HPP
 #define HEADER_PARSER_HPP
 
+#include <deque>
+
 #include "lexer.hpp"
 
 class Expr;
@@ -9,7 +11,7 @@ class Parser
 {
 private:
   Lexer& m_lexer;
-  Token  m_current_token;
+  std::deque<Token> m_tokens;
 
 public:
   Parser(Lexer& lexer);
@@ -29,13 +31,13 @@ private:
   Expr* additive_expr();
   Expr* multiplicative_expr();
   Expr* unary_expr();
-  Expr* factor();
+  Expr* primary_expression();
   void match(Token::Type token_type);
 
   void error(const std::string& msg);
 
-  Token::Type get_token_type();
-  Token get_token();
+  Token::Type get_token_type(int lookahead = 0);
+  Token get_token(int lookahead = 0);
   void  next_token();
 
 private:

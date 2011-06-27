@@ -424,6 +424,38 @@ public:
   }
 };
 
+class Function : public Expr
+{
+private:
+  std::string m_name;
+
+public:
+  Function(const std::string& name) :
+    m_name(name)
+  {}
+
+  Value eval() const
+  {
+    return Value::integer(71); // FIXME: look up the varibale in the environment
+  }
+};
+
+class Variable : public Expr
+{
+private:
+  std::string m_name;
+
+public:
+  Variable(const std::string& name) :
+    m_name(name)
+  {}
+
+  Value eval() const
+  {
+    return Value::integer(42); // FIXME: look up the varibale in the environment
+  }
+};
+
 class Integer : public Expr
 {
   int m_value;
