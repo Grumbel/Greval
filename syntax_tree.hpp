@@ -5,12 +5,13 @@
 #include <vector>
 
 #include "value.hpp"
+#include "environment.hpp"
 
 class Expr
 {
 public:
   virtual ~Expr() {}
-  virtual Value eval() const =0;
+  virtual Value eval(const Environment& env) const =0;
 };
 
 class Plus : public Expr
@@ -24,9 +25,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() + m_rhs->eval();
+    return m_lhs->eval(env) + m_rhs->eval(env);
   }
 
 private:
@@ -45,9 +46,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() - m_rhs->eval();
+    return m_lhs->eval(env) - m_rhs->eval(env);
   }
 
 private:
@@ -66,9 +67,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() * m_rhs->eval();
+    return m_lhs->eval(env) * m_rhs->eval(env);
   }
 
 private:
@@ -87,9 +88,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() / m_rhs->eval();
+    return m_lhs->eval(env) / m_rhs->eval(env);
   }
 
 private:
@@ -108,9 +109,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() % m_rhs->eval();
+    return m_lhs->eval(env) % m_rhs->eval(env);
   }
 
 private:
@@ -129,9 +130,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() & m_rhs->eval();
+    return m_lhs->eval(env) & m_rhs->eval(env);
   }
 
 private:
@@ -150,9 +151,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() ^ m_rhs->eval();
+    return m_lhs->eval(env) ^ m_rhs->eval(env);
   }
 
 private:
@@ -171,9 +172,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() | m_rhs->eval();
+    return m_lhs->eval(env) | m_rhs->eval(env);
   }
 
 private:
@@ -192,9 +193,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() == m_rhs->eval();
+    return m_lhs->eval(env) == m_rhs->eval(env);
   }
 
 private:
@@ -213,9 +214,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() != m_rhs->eval();
+    return m_lhs->eval(env) != m_rhs->eval(env);
   }
 
 private:
@@ -234,9 +235,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() > m_rhs->eval();
+    return m_lhs->eval(env) > m_rhs->eval(env);
   }
 
 private:
@@ -255,9 +256,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() < m_rhs->eval();
+    return m_lhs->eval(env) < m_rhs->eval(env);
   }
 
 private:
@@ -276,9 +277,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() <= m_rhs->eval();
+    return m_lhs->eval(env) <= m_rhs->eval(env);
   }
 
 private:
@@ -297,9 +298,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() >= m_rhs->eval();
+    return m_lhs->eval(env) >= m_rhs->eval(env);
   }
 
 private:
@@ -319,9 +320,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() << m_rhs->eval();
+    return m_lhs->eval(env) << m_rhs->eval(env);
   }
 
 private:
@@ -340,9 +341,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return m_lhs->eval() >> m_rhs->eval();
+    return m_lhs->eval(env) >> m_rhs->eval(env);
   }
 
 private:
@@ -360,9 +361,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return !m_rhs->eval();
+    return !m_rhs->eval(env);
   }
 };
 
@@ -376,9 +377,9 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return ~m_rhs->eval();
+    return ~m_rhs->eval(env);
   }
 };
 
@@ -396,15 +397,15 @@ public:
     m_rhs(rhs)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    if (m_expr->eval())
+    if (m_expr->eval(env))
     {
-      return m_lhs->eval();
+      return m_lhs->eval(env);
     }
     else
     {
-      return m_rhs->eval();
+      return m_rhs->eval(env);
     }
   }   
 };
@@ -419,9 +420,9 @@ public:
     m_expr(expr)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return -m_expr->eval();
+    return -m_expr->eval(env);
   }
 };
 
@@ -437,9 +438,14 @@ public:
     m_args(args)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return Value::integer(m_args.size()); // FIXME: look up the function in the environment
+    std::vector<Value> values;
+    for(std::vector<Expr*>::const_iterator i = m_args.begin(); i != m_args.end(); ++i)
+    {
+      values.push_back((*i)->eval(env));
+    }
+    return env.lookup_function(m_name)(values);
   }
 };
 
@@ -453,9 +459,9 @@ public:
     m_name(name)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
-    return Value::integer(42); // FIXME: look up the varibale in the environment
+    return env.lookup_variable(m_name);
   }
 };
 
@@ -468,7 +474,7 @@ public:
     m_value(value)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
     return Value::integer(m_value);
   }
@@ -487,7 +493,7 @@ public:
     m_value(value)
   {}
 
-  Value eval() const
+  Value eval(const Environment& env) const
   {
     return Value::real(m_value);
   }

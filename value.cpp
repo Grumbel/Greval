@@ -7,6 +7,8 @@
 void
 Value::print(std::ostream& os) const
 {
+  os.setf(std::ios_base::fixed, std::ios_base::floatfield);
+
   switch(m_type)
   {
     case Value::kReal:    os << "real:" << m_value.real; break;

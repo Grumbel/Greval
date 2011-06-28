@@ -1,3 +1,4 @@
+#include <math.h>
 #include <iostream>
 #include <stdlib.h>
 #include <boost/scoped_ptr.hpp>
@@ -5,6 +6,42 @@
 #include "syntax_tree.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+
+Value script_sin(const std::vector<Value>& args)
+{
+  if (args.size() != 1)
+  {
+    throw std::runtime_error("invalid number of arguments");
+  }
+  else
+  {
+    return Value::real(sinf(args[0].get_real()));
+  }
+}
+
+Value script_sqrt(const std::vector<Value>& args)
+{
+  if (args.size() != 1)
+  {
+    throw std::runtime_error("invalid number of arguments");
+  }
+  else
+  {
+    return Value::real(sqrtf(args[0].get_real()));
+  }
+}
+
+Value script_cos(const std::vector<Value>& args)
+{
+  if (args.size() != 1)
+  {
+    throw std::runtime_error("invalid number of arguments");
+  }
+  else
+  {
+    return Value::real(cosf(args[0].get_real()));
+  }
+}
 
 int main(int argc, char** argv)
 {
@@ -31,7 +68,12 @@ int main(int argc, char** argv)
       {
         Parser parser(lexer);
         boost::scoped_ptr<Expr> expr(parser.parse());
-        std::cout << expr->eval() << std::endl;
+        Environment env;
+        env.bind_function("cos", script_cos);
+        env.bind_function("sin", script_sin);
+        env.bind_function("sqrt", script_sqrt);
+        env.bind_variable("pi", Value::real(static_cast<float>(M_PI)));
+        std::cout << expr->eval(env) << std::endl;
       }
     }
     catch(const std::exception& err)
