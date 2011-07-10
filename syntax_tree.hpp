@@ -1,17 +1,23 @@
 #ifndef HEADER_SYNTAX_TREE_HPP
 #define HEADER_SYNTAX_TREE_HPP
 
+#include <ostream>
 #include <boost/scoped_ptr.hpp>
 #include <vector>
 
 #include "value.hpp"
 #include "environment.hpp"
+#include "visitor.hpp"
+
+class Visitor;
 
 class Expr
 {
 public:
   virtual ~Expr() {}
-  virtual Value eval(const Environment& env) const =0;
+  virtual Value eval(const Environment& env) const = 0;
+
+  virtual void accept(Visitor& visitor) const = 0;
 };
 
 class Plus : public Expr
@@ -29,6 +35,8 @@ public:
   {
     return m_lhs->eval(env) + m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   Plus(const Plus&);
@@ -51,6 +59,8 @@ public:
     return m_lhs->eval(env) - m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   Minus(const Minus&);
   Minus& operator=(const Minus&);
@@ -71,6 +81,8 @@ public:
   {
     return m_lhs->eval(env) * m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   Mult(const Mult&);
@@ -93,6 +105,8 @@ public:
     return m_lhs->eval(env) / m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   Div(const Div&);
   Div& operator=(const Div&);
@@ -113,6 +127,8 @@ public:
   {
     return m_lhs->eval(env) % m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   Modulo(const Modulo&);
@@ -135,6 +151,8 @@ public:
     return m_lhs->eval(env) & m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   BitwiseAND(const BitwiseAND&);
   BitwiseAND& operator=(const BitwiseAND&);
@@ -155,6 +173,8 @@ public:
   {
     return m_lhs->eval(env) ^ m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   BitwiseXOR(const BitwiseXOR&);
@@ -177,6 +197,8 @@ public:
     return m_lhs->eval(env) | m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   BitwiseOR(const BitwiseOR&);
   BitwiseOR& operator=(const BitwiseOR&);
@@ -197,6 +219,8 @@ public:
   {
     return m_lhs->eval(env) == m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   Equal(const Equal&);
@@ -219,6 +243,8 @@ public:
     return m_lhs->eval(env) != m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   NotEqual(const NotEqual&);
   NotEqual& operator=(const NotEqual&);
@@ -239,6 +265,8 @@ public:
   {
     return m_lhs->eval(env) > m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   LargerThen(const LargerThen&);
@@ -261,6 +289,8 @@ public:
     return m_lhs->eval(env) < m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   SmallerThen(const SmallerThen&);
   SmallerThen& operator=(const SmallerThen&);
@@ -282,6 +312,8 @@ public:
     return m_lhs->eval(env) <= m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   SmallerOrEqualThen(const SmallerOrEqualThen&);
   SmallerOrEqualThen& operator=(const SmallerOrEqualThen&);
@@ -302,6 +334,8 @@ public:
   {
     return m_lhs->eval(env) >= m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 
 private:
   LargerOrEqualThen(const LargerOrEqualThen&);
@@ -325,6 +359,8 @@ public:
     return m_lhs->eval(env) << m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   ShiftLeft(const ShiftLeft&);
   ShiftLeft& operator=(const ShiftLeft&);
@@ -346,6 +382,8 @@ public:
     return m_lhs->eval(env) >> m_rhs->eval(env);
   }
 
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+
 private:
   ShiftRight(const ShiftRight&);
   ShiftRight& operator=(const ShiftRight&);
@@ -365,6 +403,8 @@ public:
   {
     return !m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
 
 class BitwiseNOT : public Expr
@@ -381,6 +421,8 @@ public:
   {
     return ~m_rhs->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
 
 
@@ -408,6 +450,8 @@ public:
       return m_rhs->eval(env);
     }
   }   
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr, *m_lhs, *m_rhs); }
 };
 
 class Negate : public Expr
@@ -424,6 +468,8 @@ public:
   {
     return -m_expr->eval(env);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr); }
 };
 
 class Function : public Expr
@@ -438,6 +484,8 @@ public:
     m_args(args)
   {}
 
+  std::string get_name() const { return m_name; }
+
   Value eval(const Environment& env) const
   {
     std::vector<Value> values;
@@ -447,6 +495,8 @@ public:
     }
     return env.lookup_function(m_name)(values);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Variable : public Expr
@@ -459,10 +509,14 @@ public:
     m_name(name)
   {}
 
+  std::string get_name() const { return m_name; }
+
   Value eval(const Environment& env) const
   {
     return env.lookup_variable(m_name);
   }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Integer : public Expr
@@ -478,6 +532,10 @@ public:
   {
     return Value::integer(m_value);
   }
+
+  int get_value() const { return m_value; }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 
 private:
   Integer(const Integer&);
@@ -497,6 +555,10 @@ public:
   {
     return Value::real(m_value);
   }
+
+  float get_value() const { return m_value; }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 
 private:
   Real(const Real&);

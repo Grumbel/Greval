@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <boost/scoped_ptr.hpp>
 
-#include "syntax_tree.hpp"
+#include "print_visitor.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "syntax_tree.hpp"
 
 Value script_sin(const std::vector<Value>& args)
 {
@@ -73,7 +74,11 @@ int main(int argc, char** argv)
         env.bind_function("sin", script_sin);
         env.bind_function("sqrt", script_sqrt);
         env.bind_variable("pi", Value::real(static_cast<float>(M_PI)));
-        std::cout << expr->eval(env) << std::endl;
+
+        PrintVisitor print_visitor;
+        expr->accept(print_visitor);
+
+        //std::cout << expr->eval(env) << std::endl;
       }
     }
     catch(const std::exception& err)
