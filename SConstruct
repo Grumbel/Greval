@@ -6,7 +6,8 @@ env.Program("expr", [ "expr.cpp",
                       "token.cpp",
                       "value.cpp",
                       "environment.cpp",
-                      "print_visitor.cpp"
+                      "print_visitor.cpp",
+                      "eval_visitor.cpp"
                       ] )
 
 env.Program("lexer_test", [ "lexer_test.cpp",

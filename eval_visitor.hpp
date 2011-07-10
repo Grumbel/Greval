@@ -1,17 +1,23 @@
-#ifndef HEADER_PRINT_VISITOR_HPP
-#define HEADER_PRINT_VISITOR_HPP
+#ifndef HEADER_EVAL_VISITOR_HPP
+#define HEADER_EVAL_VISITOR_HPP
 
-#include <iosfwd>
+#include <vector>
 
+#include "value.hpp"
 #include "visitor.hpp"
 
-class PrintVisitor : public Visitor
+class Environment;
+
+class EvalVisitor : public Visitor
 {
 private:
-  std::ostream& m_os;
-  
+  std::vector<Value> m_stack;
+  const Environment& m_env;
+
 public:
-  PrintVisitor(std::ostream& os);
+  EvalVisitor(const Environment& env);
+
+  Value get_result() const;
 
   void visit(const Plus& node, const Expr& lhs, const Expr& rhs);
   void visit(const Minus& node, const Expr& lhs, const Expr& rhs);

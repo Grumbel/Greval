@@ -2,7 +2,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <boost/scoped_ptr.hpp>
+#include <sstream>
 
+#include "eval_visitor.hpp"
 #include "print_visitor.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -75,10 +77,16 @@ int main(int argc, char** argv)
         env.bind_function("sqrt", script_sqrt);
         env.bind_variable("pi", Value::real(static_cast<float>(M_PI)));
 
-        PrintVisitor print_visitor;
+        std::ostringstream str;
+        PrintVisitor print_visitor(str);
         expr->accept(print_visitor);
+        std::cout << "Syntax Tree: " << str.str() << std::endl;
 
-        //std::cout << expr->eval(env) << std::endl;
+        std::cout << "Expr::eval(): " << expr->eval(env) << std::endl;
+
+        EvalVisitor eval_visitor(env);
+        expr->accept(eval_visitor);
+        std::cout << "EvalVisitor:  " << eval_visitor.get_result() << std::endl;
       }
     }
     catch(const std::exception& err)
