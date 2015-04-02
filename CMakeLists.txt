@@ -24,21 +24,21 @@ if(WARNINGS)
 endif()
 
 add_executable(expr
-  expr.cpp
-  lexer.cpp
-  parser.cpp
-  token.cpp
-  value.cpp
-  environment.cpp
-  print_visitor.cpp
-  eval_visitor.cpp)
+  src/expr.cpp
+  src/lexer.cpp
+  src/parser.cpp
+  src/token.cpp
+  src/value.cpp
+  src/environment.cpp
+  src/print_visitor.cpp
+  src/eval_visitor.cpp)
 
 add_executable(lexer_test
-  lexer_test.cpp
-  lexer.cpp
-  parser.cpp
-  token.cpp
-  value.cpp
-  environment.cpp)
+  src/lexer_test.cpp
+  src/lexer.cpp
+  src/parser.cpp
+  src/token.cpp
+  src/value.cpp
+  src/environment.cpp)
 
 # EOF #
