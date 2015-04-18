@@ -18,7 +18,7 @@
 #define HEADER_SYNTAX_TREE_HPP
 
 #include <ostream>
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 #include <vector>
 
 #include "value.hpp"
@@ -38,8 +38,8 @@ public:
 
 class Plus : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Plus(Expr* lhs, Expr* rhs) :
@@ -61,8 +61,8 @@ private:
 
 class Minus : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Minus(Expr* lhs, Expr* rhs) :
@@ -84,8 +84,8 @@ private:
 
 class Mult : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Mult(Expr* lhs, Expr* rhs) :
@@ -107,8 +107,8 @@ private:
 
 class Div : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Div(Expr* lhs, Expr* rhs) :
@@ -130,8 +130,8 @@ private:
 
 class Modulo : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Modulo(Expr* lhs, Expr* rhs) :
@@ -153,8 +153,8 @@ private:
 
 class BitwiseAND : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   BitwiseAND(Expr* lhs, Expr* rhs) :
@@ -176,8 +176,8 @@ private:
 
 class BitwiseXOR : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   BitwiseXOR(Expr* lhs, Expr* rhs) :
@@ -199,8 +199,8 @@ private:
 
 class BitwiseOR : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   BitwiseOR(Expr* lhs, Expr* rhs) :
@@ -222,8 +222,8 @@ private:
 
 class Equal : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Equal(Expr* lhs, Expr* rhs) :
@@ -245,8 +245,8 @@ private:
 
 class NotEqual : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   NotEqual(Expr* lhs, Expr* rhs) :
@@ -268,8 +268,8 @@ private:
 
 class LargerThen : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   LargerThen(Expr* lhs, Expr* rhs) :
@@ -291,8 +291,8 @@ private:
 
 class SmallerThen : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   SmallerThen(Expr* lhs, Expr* rhs) :
@@ -314,8 +314,8 @@ private:
 
 class SmallerOrEqualThen : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   SmallerOrEqualThen(Expr* lhs, Expr* rhs) :
@@ -337,8 +337,8 @@ private:
 
 class LargerOrEqualThen : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   LargerOrEqualThen(Expr* lhs, Expr* rhs) :
@@ -361,8 +361,8 @@ private:
 
 class ShiftLeft : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   ShiftLeft(Expr* lhs, Expr* rhs) :
@@ -384,8 +384,8 @@ private:
 
 class ShiftRight : public Expr
 {
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   ShiftRight(Expr* lhs, Expr* rhs) :
@@ -408,7 +408,7 @@ private:
 class LogicalNOT : public Expr
 {
 private:
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   LogicalNOT(Expr* rhs) :
@@ -426,7 +426,7 @@ public:
 class BitwiseNOT : public Expr
 {
 private:
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   BitwiseNOT(Expr* rhs) :
@@ -444,9 +444,9 @@ public:
 
 class Condition : public Expr
 {
-  boost::scoped_ptr<Expr> m_expr;
-  boost::scoped_ptr<Expr> m_lhs;
-  boost::scoped_ptr<Expr> m_rhs;
+  std::unique_ptr<Expr> m_expr;
+  std::unique_ptr<Expr> m_lhs;
+  std::unique_ptr<Expr> m_rhs;
 
 public:
   Condition(Expr* expr, Expr* lhs, Expr* rhs) :
@@ -473,7 +473,7 @@ public:
 class Negate : public Expr
 {
 private:
-  boost::scoped_ptr<Expr> m_expr;
+  std::unique_ptr<Expr> m_expr;
 
 public:
   Negate(Expr* expr) :

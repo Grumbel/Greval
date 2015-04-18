@@ -17,13 +17,13 @@
 #ifndef HEADER_ENVIRONMENT_HPP
 #define HEADER_ENVIRONMENT_HPP
 
-#include <boost/function.hpp>
+#include <functional>
 #include <vector>
 #include <map>
 
 #include "value.hpp"
 
-typedef boost::function<Value(const std::vector<Value>&)> ScriptFunction;
+typedef std::function<Value(const std::vector<Value>&)> ScriptFunction;
 
 class Environment
 {

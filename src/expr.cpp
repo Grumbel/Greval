@@ -17,8 +17,8 @@
 #include <math.h>
 #include <iostream>
 #include <stdlib.h>
-#include <boost/scoped_ptr.hpp>
 #include <sstream>
+#include <memory>
 
 #include "eval_visitor.hpp"
 #include "print_visitor.hpp"
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
       else
       {
         Parser parser(lexer);
-        boost::scoped_ptr<Expr> expr(parser.parse());
+        std::unique_ptr<Expr> expr(parser.parse());
         Environment env;
         env.bind_function("cos", script_cos);
         env.bind_function("sin", script_sin);
