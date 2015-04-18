@@ -96,6 +96,14 @@ public:
     }
   }
 
+  ~Token()
+  {
+    if (m_type == kString)
+    {
+      delete m_value.string;
+    }
+  }
+
   Token& operator=(const Token& rhs)
   {
     if (this != &rhs)
