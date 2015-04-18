@@ -184,7 +184,7 @@ EvalVisitor::visit(const Condition& node)
 void
 EvalVisitor::visit(const Negate& node)
 {
-  EVAL_UNARY_OP(!, node.get_rhs());
+  EVAL_UNARY_OP(-, node.get_rhs());
 }
 
 void

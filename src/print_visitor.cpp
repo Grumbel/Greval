@@ -215,7 +215,7 @@ PrintVisitor::visit(const Condition& node)
 void
 PrintVisitor::visit(const Negate& node)
 {
-  m_os << "(! ";
+  m_os << "(- ";
   node.get_rhs().accept(*this);
   m_os << ")";
 }

@@ -52,6 +52,11 @@ TEST(ExprTest, test)
   EXPECT_EQ(Value::integer(1), eval_expr("1243<23222"));
   EXPECT_EQ(Value::integer(1), eval_expr("!(1243>23222)"));
 
+  // unary expressions
+  EXPECT_EQ(Value::integer(-45), eval_expr("-45"));
+  EXPECT_EQ(Value::integer(45), eval_expr("--45"));
+  EXPECT_EQ(Value::integer(-45), eval_expr("-+-+-45"));
+
   // conditionals
   EXPECT_EQ(Value::integer(1234), eval_expr("(5>2)?1234:5678"));
   EXPECT_EQ(Value::integer(5678), eval_expr("(5<2)?1234:5678"));
