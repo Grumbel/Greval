@@ -26,8 +26,8 @@ TEST(ExprTest, test)
   EXPECT_EQ(Value::real(7.75), eval_expr("5.0+11.0/12.0*3.0"));
   EXPECT_EQ(Value::integer(1), eval_expr("1243<23222"));
   EXPECT_EQ(Value::integer(1), eval_expr("!(1243>23222)"));
-  //EXPECT_EQ(Value::integer(1234), eval_expr("(5>2)?1234:5678"));
-  //EXPECT_EQ(Value::integer(5678), eval_expr("(5<2)?1234:5678"));
+  EXPECT_EQ(Value::integer(1234), eval_expr("(5>2)?1234:5678"));
+  EXPECT_EQ(Value::integer(5678), eval_expr("(5<2)?1234:5678"));
 }
 
 /* EOF */

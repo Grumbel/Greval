@@ -166,7 +166,19 @@ EvalVisitor::visit(const BitwiseNOT& node, const Expr& rhs)
 void
 EvalVisitor::visit(const Condition& node, const Expr& expr, const Expr& lhs, const Expr& rhs)
 {
-  assert(!"implement me");
+  expr.accept(*this);
+  assert(!m_stack.empty());
+  Value expr_value = m_stack.back();
+  m_stack.pop_back();
+
+  if (expr_value.get_integer())
+  {
+    lhs.accept(*this);
+  }
+  else
+  {
+    rhs.accept(*this);
+  }
 }
 
 void
