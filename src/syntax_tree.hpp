@@ -43,7 +43,7 @@ class Plus : public Expr
 
 public:
   Plus(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -66,7 +66,7 @@ class Minus : public Expr
 
 public:
   Minus(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -89,7 +89,7 @@ class Mult : public Expr
 
 public:
   Mult(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -112,7 +112,7 @@ class Div : public Expr
 
 public:
   Div(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -135,7 +135,7 @@ class Modulo : public Expr
 
 public:
   Modulo(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -158,7 +158,7 @@ class BitwiseAND : public Expr
 
 public:
   BitwiseAND(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -181,7 +181,7 @@ class BitwiseXOR : public Expr
 
 public:
   BitwiseXOR(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -204,7 +204,7 @@ class BitwiseOR : public Expr
 
 public:
   BitwiseOR(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -227,7 +227,7 @@ class Equal : public Expr
 
 public:
   Equal(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -250,7 +250,7 @@ class NotEqual : public Expr
 
 public:
   NotEqual(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -273,7 +273,7 @@ class LargerThen : public Expr
 
 public:
   LargerThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -296,7 +296,7 @@ class SmallerThen : public Expr
 
 public:
   SmallerThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -319,7 +319,7 @@ class SmallerOrEqualThen : public Expr
 
 public:
   SmallerOrEqualThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -342,7 +342,7 @@ class LargerOrEqualThen : public Expr
 
 public:
   LargerOrEqualThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -366,7 +366,7 @@ class ShiftLeft : public Expr
 
 public:
   ShiftLeft(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -389,7 +389,7 @@ class ShiftRight : public Expr
 
 public:
   ShiftRight(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs), 
+    m_lhs(lhs),
     m_rhs(rhs)
   {}
 
@@ -465,7 +465,7 @@ public:
     {
       return m_rhs->eval(env);
     }
-  }   
+  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr, *m_lhs, *m_rhs); }
 };

@@ -52,7 +52,7 @@ public:
     return value;
   }
 
-  static Value real(float v) { 
+  static Value real(float v) {
     Value value;
     value.m_type = kReal;
     value.m_value.real = v;
@@ -103,11 +103,11 @@ public:
 
   Type get_type() const { return m_type; }
 
-  int get_integer() { 
+  int get_integer() {
     switch(m_type)
     {
-      case kReal:    return static_cast<int>(m_value.real); 
-      case kInteger: return m_value.integer; 
+      case kReal:    return static_cast<int>(m_value.real);
+      case kInteger: return m_value.integer;
       case kString:  throw std::runtime_error("can't convert String to Integer");
     }
   }
@@ -115,8 +115,8 @@ public:
   float get_real() const {
     switch(m_type)
     {
-      case kReal:    return m_value.real; 
-      case kInteger: return static_cast<float>(m_value.integer); 
+      case kReal:    return m_value.real;
+      case kInteger: return static_cast<float>(m_value.integer);
       case kString:  throw std::runtime_error("can't convert String to Real");
     }
 

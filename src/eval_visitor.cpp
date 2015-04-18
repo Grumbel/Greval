@@ -166,7 +166,7 @@ EvalVisitor::visit(const BitwiseNOT& node, const Expr& rhs)
 void
 EvalVisitor::visit(const Condition& node, const Expr& expr, const Expr& lhs, const Expr& rhs)
 {
-  
+
 }
 
 void

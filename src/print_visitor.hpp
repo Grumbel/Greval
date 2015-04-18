@@ -25,7 +25,7 @@ class PrintVisitor : public Visitor
 {
 private:
   std::ostream& m_os;
-  
+
 public:
   PrintVisitor(std::ostream& os);
 

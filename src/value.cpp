@@ -222,11 +222,11 @@ Value::operator~() const
   {
     case kInteger:
       return Value::integer(~m_value.integer);
-      
+
     case kReal:
       throw std::runtime_error("illegal operation ~ on Real");
 
-    case kString:  
+    case kString:
       throw std::runtime_error("illegal operation ~ on String");
   }
 
@@ -240,11 +240,11 @@ Value::operator!() const
   {
     case kInteger:
       return Value::integer(!m_value.integer);
-      
+
     case kReal:
       return Value::integer(!m_value.real);
 
-    case kString:  
+    case kString:
       throw std::runtime_error("illegal operation ! on String");
   }
 
@@ -257,11 +257,11 @@ Value::operator void*() const
   {
     case kInteger:
       return reinterpret_cast<void*>(m_value.integer != 0);
-      
+
     case kReal:
       return reinterpret_cast<void*>(m_value.real != 0);
 
-    case kString:  
+    case kString:
       return reinterpret_cast<void*>(!m_value.string->empty());
   }
 
@@ -275,7 +275,7 @@ Value::operator-() const
   {
     case kInteger:
       return Value::integer(-m_value.integer);
-      
+
     case kReal:
       return Value::real(-m_value.real);
 

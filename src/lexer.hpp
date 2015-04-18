@@ -29,7 +29,7 @@ private:
 
 public:
   Lexer(const std::string& str);
-  
+
   Token get_token();
   bool is_eof() const;
 

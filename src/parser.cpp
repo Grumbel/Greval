@@ -26,7 +26,7 @@
 Parser::Parser(Lexer& lexer) :
   m_lexer(lexer),
   m_tokens()
-{  
+{
 }
 
 Expr*
@@ -59,7 +59,7 @@ Parser::conditional_expr()
           expr = new Condition(expr, lhs, rhs);
         }
         break;
-                
+
       default:
         return expr;
     }
@@ -78,7 +78,7 @@ Parser::logical_and()
   return 0;
 }
 
-Expr* 
+Expr*
 Parser::bitwise_or()
 {
   Expr* lhs = bitwise_xor();
@@ -90,7 +90,7 @@ Parser::bitwise_or()
         next_token();
         lhs = new BitwiseOR(lhs, bitwise_xor());
         break;
-                
+
       default:
         return lhs;
     }
@@ -109,7 +109,7 @@ Parser::bitwise_xor()
         next_token();
         lhs = new BitwiseXOR(lhs, bitwise_and());
         break;
-                
+
       default:
         return lhs;
     }
@@ -128,7 +128,7 @@ Parser::bitwise_and()
         next_token();
         lhs = new BitwiseAND(lhs, equality_expr());
         break;
-                
+
       default:
         return lhs;
     }
@@ -152,7 +152,7 @@ Parser::equality_expr()
         next_token();
         lhs = new NotEqual(lhs, relational_expr());
         break;
-                
+
       default:
         return lhs;
     }
@@ -249,17 +249,17 @@ Parser::multiplicative_expr()
   {
     switch(get_token_type())
     {
-      case Token::kMult: 
+      case Token::kMult:
         next_token();
         lhs = new Mult(lhs, unary_expr());
         break;
 
-      case Token::kDiv: 
+      case Token::kDiv:
         next_token();
         lhs = new Div(lhs, unary_expr());
         break;
-        
-      case Token::kModulo: 
+
+      case Token::kModulo:
         next_token();
         lhs = new Modulo(lhs, unary_expr());
         break;
@@ -270,7 +270,7 @@ Parser::multiplicative_expr()
   }
 }
 
-Expr* 
+Expr*
 Parser::unary_expr()
 {
   switch(get_token_type())
@@ -305,7 +305,7 @@ Parser::primary_expression()
   {
     case Token::kParentLeft:
       match(Token::kParentLeft);
-      lhs = expr(); 
+      lhs = expr();
       match(Token::kParentRight);
       break;
 
@@ -342,7 +342,7 @@ Parser::primary_expression()
               }
             }
           }
-          match(Token::kParentRight); 
+          match(Token::kParentRight);
           lhs = new Function(name, args);
         }
         else
@@ -355,7 +355,7 @@ Parser::primary_expression()
     default:
       throw std::runtime_error("syntax error");
   }
-  
+
   return lhs;
 }
 

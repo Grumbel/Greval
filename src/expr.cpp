@@ -71,10 +71,10 @@ int main(int argc, char** argv)
   }
   else
   {
-    try 
+    try
     {
       Lexer lexer(argv[1]);
-    
+
       if (false)
       {
         while(!lexer.is_eof())

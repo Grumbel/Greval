@@ -112,7 +112,7 @@ public:
       }
     }
     return *this;
-  }  
+  }
 
   Type  get_type() const { return m_type; }
   int   get_integer() const { return m_value.integer; }

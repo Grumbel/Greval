@@ -38,7 +38,7 @@ public:
 
   void bind_variable(const std::string& name, const Value& value);
   void bind_function(const std::string& name, const ScriptFunction& value);
-  
+
   Value lookup_variable(const std::string& name) const;
   ScriptFunction lookup_function(const std::string& name) const;
 
