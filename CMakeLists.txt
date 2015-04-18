@@ -17,6 +17,8 @@
 cmake_minimum_required(VERSION 3.0)
 project(expr VERSION 0.1.0)
 
+add_compile_options(-std=c++1y)
+
 set(WARNINGS 0 CACHE BOOL "Switch on extra warnings")
 
 if(WARNINGS)
