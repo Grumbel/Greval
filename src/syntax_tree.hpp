@@ -501,6 +501,7 @@ public:
   {}
 
   std::string get_name() const { return m_name; }
+  const std::vector<Expr*>& get_args() const { return m_args; }
 
   Value eval(const Environment& env) const
   {

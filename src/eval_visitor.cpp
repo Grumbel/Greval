@@ -190,7 +190,19 @@ EvalVisitor::visit(const Negate& node, const Expr& expr)
 void
 EvalVisitor::visit(const Function& node)
 {
-  assert(!"implement me");
+  ScriptFunction func = m_env.lookup_function(node.get_name());
+
+  std::vector<Value> args;
+
+  for(auto it : node.get_args())
+  {
+    it->accept(*this);
+    assert(!m_stack.empty());
+    args.push_back(m_stack.back());
+    m_stack.pop_back();
+  }
+
+  m_stack.push_back(func(args));
 }
 
 void
