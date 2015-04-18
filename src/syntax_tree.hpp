@@ -31,7 +31,6 @@ class Expr
 {
 public:
   virtual ~Expr() {}
-  virtual Value eval(const Environment& env) const = 0;
   virtual void accept(Visitor& visitor) const = 0;
 };
 
@@ -71,11 +70,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) + m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -85,11 +79,6 @@ public:
   Minus(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) - m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -101,11 +90,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) * m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -115,11 +99,6 @@ public:
   Div(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) / m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -131,11 +110,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) % m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -145,11 +119,6 @@ public:
   BitwiseAND(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) & m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -161,11 +130,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) ^ m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -175,11 +139,6 @@ public:
   BitwiseOR(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) | m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -191,11 +150,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) == m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -205,11 +159,6 @@ public:
   NotEqual(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) != m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -221,11 +170,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) > m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -235,11 +179,6 @@ public:
   SmallerThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) < m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -251,11 +190,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) <= m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -265,11 +199,6 @@ public:
   LargerOrEqualThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) >= m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -282,11 +211,6 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) << m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
 
@@ -296,11 +220,6 @@ public:
   ShiftRight(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return m_lhs->eval(env) >> m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
 };
@@ -312,11 +231,6 @@ public:
     UnaryOp(std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return !m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
 
@@ -327,11 +241,6 @@ public:
     UnaryOp(std::move(rhs))
   {}
 
-  Value eval(const Environment& env) const
-  {
-    return ~m_rhs->eval(env);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
 
@@ -341,11 +250,6 @@ public:
   Negate(std::unique_ptr<Expr>&& rhs) :
     UnaryOp(std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return -m_rhs->eval(env);
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
@@ -362,18 +266,6 @@ public:
     m_lhs(std::move(lhs)),
     m_rhs(std::move(rhs))
   {}
-
-  Value eval(const Environment& env) const
-  {
-    if (m_expr->eval(env))
-    {
-      return m_lhs->eval(env);
-    }
-    else
-    {
-      return m_rhs->eval(env);
-    }
-  }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr, *m_lhs, *m_rhs); }
 };
@@ -393,16 +285,6 @@ public:
   std::string get_name() const { return m_name; }
   const std::vector<std::unique_ptr<Expr> >& get_args() const { return m_args; }
 
-  Value eval(const Environment& env) const
-  {
-    std::vector<Value> values;
-    for(auto i = m_args.begin(); i != m_args.end(); ++i)
-    {
-      values.push_back((*i)->eval(env));
-    }
-    return env.lookup_function(m_name)(values);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
@@ -418,11 +300,6 @@ public:
 
   std::string get_name() const { return m_name; }
 
-  Value eval(const Environment& env) const
-  {
-    return env.lookup_variable(m_name);
-  }
-
   void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
@@ -434,11 +311,6 @@ public:
   Integer(int value) :
     m_value(value)
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return Value::integer(m_value);
-  }
 
   int get_value() const { return m_value; }
 
@@ -453,11 +325,6 @@ public:
   Real(float value) :
     m_value(value)
   {}
-
-  Value eval(const Environment& env) const
-  {
-    return Value::real(m_value);
-  }
 
   float get_value() const { return m_value; }
 

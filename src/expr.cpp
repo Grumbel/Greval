@@ -103,11 +103,9 @@ int main(int argc, char** argv)
         expr->accept(print_visitor);
         std::cout << "Syntax Tree: " << str.str() << std::endl;
 
-        std::cout << "Expr::eval(): " << expr->eval(env) << std::endl;
-
         EvalVisitor eval_visitor(env);
         expr->accept(eval_visitor);
-        std::cout << "EvalVisitor:  " << eval_visitor.get_result() << std::endl;
+        std::cout << "EvalVisitor: " << eval_visitor.get_result() << std::endl;
       }
     }
     catch(const std::exception& err)
