@@ -224,8 +224,12 @@ void
 PrintVisitor::visit(const Function& node)
 {
   m_os << "(" << node.get_name();
-  //rhs.accept(*this);
-  m_os << " ...)";
+  for(const auto& arg : node.get_args())
+  {
+    m_os << " ";
+    arg->accept(*this);
+  }
+  m_os << ")";
 }
 
 void
