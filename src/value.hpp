@@ -103,24 +103,38 @@ public:
 
   Type get_type() const { return m_type; }
 
-  int get_integer() {
+  int get_integer() const {
     switch(m_type)
     {
-      case kReal:    return static_cast<int>(m_value.real);
-      case kInteger: return m_value.integer;
-      case kString:  throw std::runtime_error("can't convert String to Integer");
+      case kReal:
+        return static_cast<int>(m_value.real);
+
+      case kInteger:
+        return m_value.integer;
+
+      case kString:
+        throw std::runtime_error("can't convert String to Integer");
+
+      default:
+        throw std::runtime_error("can't convert unknown type to Integer");
     }
   }
 
   float get_real() const {
     switch(m_type)
     {
-      case kReal:    return m_value.real;
-      case kInteger: return static_cast<float>(m_value.integer);
-      case kString:  throw std::runtime_error("can't convert String to Real");
-    }
+      case kReal:
+        return m_value.real;
 
-    return 0.0f;
+      case kInteger:
+        return static_cast<float>(m_value.integer);
+
+      case kString:
+        throw std::runtime_error("can't convert String to Real");
+
+      default:
+        throw std::runtime_error("can't convert unknown type to Real");
+    }
   }
 
   void print(std::ostream& os) const;
