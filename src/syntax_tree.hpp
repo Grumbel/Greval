@@ -42,9 +42,9 @@ class Plus : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Plus(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Plus(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -65,9 +65,9 @@ class Minus : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Minus(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Minus(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -88,9 +88,9 @@ class Mult : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Mult(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Mult(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -111,9 +111,9 @@ class Div : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Div(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Div(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -134,9 +134,9 @@ class Modulo : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Modulo(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Modulo(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -157,9 +157,9 @@ class BitwiseAND : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  BitwiseAND(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  BitwiseAND(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -180,9 +180,9 @@ class BitwiseXOR : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  BitwiseXOR(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  BitwiseXOR(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -203,9 +203,9 @@ class BitwiseOR : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  BitwiseOR(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  BitwiseOR(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -226,9 +226,9 @@ class Equal : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Equal(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Equal(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -249,9 +249,9 @@ class NotEqual : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  NotEqual(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  NotEqual(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -272,9 +272,9 @@ class LargerThen : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  LargerThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  LargerThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -295,9 +295,9 @@ class SmallerThen : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  SmallerThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  SmallerThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -318,9 +318,9 @@ class SmallerOrEqualThen : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  SmallerOrEqualThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  SmallerOrEqualThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -341,9 +341,9 @@ class LargerOrEqualThen : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  LargerOrEqualThen(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  LargerOrEqualThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -365,9 +365,9 @@ class ShiftLeft : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  ShiftLeft(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  ShiftLeft(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -388,9 +388,9 @@ class ShiftRight : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  ShiftRight(Expr* lhs, Expr* rhs) :
-    m_lhs(lhs),
-    m_rhs(rhs)
+  ShiftRight(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -411,8 +411,8 @@ private:
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  LogicalNOT(Expr* rhs) :
-    m_rhs(rhs)
+  LogicalNOT(std::unique_ptr<Expr>&& rhs) :
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -429,8 +429,8 @@ private:
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  BitwiseNOT(Expr* rhs) :
-    m_rhs(rhs)
+  BitwiseNOT(std::unique_ptr<Expr>&& rhs) :
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -449,10 +449,10 @@ class Condition : public Expr
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Condition(Expr* expr, Expr* lhs, Expr* rhs) :
-    m_expr(expr),
-    m_lhs(lhs),
-    m_rhs(rhs)
+  Condition(std::unique_ptr<Expr>&& expr, std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    m_expr(std::move(expr)),
+    m_lhs(std::move(lhs)),
+    m_rhs(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -476,8 +476,8 @@ private:
   std::unique_ptr<Expr> m_expr;
 
 public:
-  Negate(Expr* expr) :
-    m_expr(expr)
+  Negate(std::unique_ptr<Expr>&& expr) :
+    m_expr(std::move(expr))
   {}
 
   Value eval(const Environment& env) const
@@ -492,21 +492,21 @@ class Function : public Expr
 {
 private:
   std::string m_name;
-  std::vector<Expr*> m_args; // FIXME: memleak
+  std::vector<std::unique_ptr<Expr> > m_args;
 
 public:
-  Function(const std::string& name, const std::vector<Expr*>& args) :
+  Function(const std::string& name, std::vector<std::unique_ptr<Expr> >&& args) :
     m_name(name),
-    m_args(args)
+    m_args(std::move(args))
   {}
 
   std::string get_name() const { return m_name; }
-  const std::vector<Expr*>& get_args() const { return m_args; }
+  const std::vector<std::unique_ptr<Expr> >& get_args() const { return m_args; }
 
   Value eval(const Environment& env) const
   {
     std::vector<Value> values;
-    for(std::vector<Expr*>::const_iterator i = m_args.begin(); i != m_args.end(); ++i)
+    for(auto i = m_args.begin(); i != m_args.end(); ++i)
     {
       values.push_back((*i)->eval(env));
     }

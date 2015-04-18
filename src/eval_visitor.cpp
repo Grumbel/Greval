@@ -194,7 +194,7 @@ EvalVisitor::visit(const Function& node)
 
   std::vector<Value> args;
 
-  for(auto it : node.get_args())
+  for(const auto& it : node.get_args())
   {
     it->accept(*this);
     assert(!m_stack.empty());

@@ -31,23 +31,23 @@ private:
 
 public:
   Parser(Lexer& lexer);
-  Expr* parse();
+  std::unique_ptr<Expr> parse();
 
 private:
-  Expr* expr();
-  Expr* conditional_expr();
-  Expr* logical_or();
-  Expr* logical_and();
-  Expr* bitwise_or();
-  Expr* bitwise_xor();
-  Expr* bitwise_and();
-  Expr* equality_expr();
-  Expr* relational_expr();
-  Expr* shift_expr();
-  Expr* additive_expr();
-  Expr* multiplicative_expr();
-  Expr* unary_expr();
-  Expr* primary_expression();
+  std::unique_ptr<Expr> expr();
+  std::unique_ptr<Expr> conditional_expr();
+  std::unique_ptr<Expr> logical_or();
+  std::unique_ptr<Expr> logical_and();
+  std::unique_ptr<Expr> bitwise_or();
+  std::unique_ptr<Expr> bitwise_xor();
+  std::unique_ptr<Expr> bitwise_and();
+  std::unique_ptr<Expr> equality_expr();
+  std::unique_ptr<Expr> relational_expr();
+  std::unique_ptr<Expr> shift_expr();
+  std::unique_ptr<Expr> additive_expr();
+  std::unique_ptr<Expr> multiplicative_expr();
+  std::unique_ptr<Expr> unary_expr();
+  std::unique_ptr<Expr> primary_expression();
   void match(Token::Type token_type);
 
   void error(const std::string& msg);
