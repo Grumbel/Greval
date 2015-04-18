@@ -64,7 +64,7 @@ Value script_cos(const std::vector<Value>& args)
 
 int main(int argc, char** argv)
 {
-  if (argc != 2)
+  if (argc < 2)
   {
     std::cerr << "error: argument required" << std::endl;
     return EXIT_FAILURE;
@@ -73,7 +73,12 @@ int main(int argc, char** argv)
   {
     try
     {
-      Lexer lexer(argv[1]);
+      std::string args;
+      for(int i = 1; i < argc; ++i)
+      {
+        args += argv[i];
+      }
+      Lexer lexer(args);
 
       if (false)
       {
