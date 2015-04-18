@@ -32,19 +32,43 @@ class Expr
 public:
   virtual ~Expr() {}
   virtual Value eval(const Environment& env) const = 0;
-
   virtual void accept(Visitor& visitor) const = 0;
 };
 
-class Plus : public Expr
+class UnaryOp : public Expr
 {
+protected:
+  std::unique_ptr<Expr> m_rhs;
+
+public:
+  const Expr& get_rhs() const { return *m_rhs; }
+
+  UnaryOp(std::unique_ptr<Expr>&& rhs) :
+    m_rhs(std::move(rhs))
+  {}
+};
+
+class BinaryOp : public Expr
+{
+protected:
   std::unique_ptr<Expr> m_lhs;
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  Plus(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+  const Expr& get_lhs() const { return *m_lhs; }
+  const Expr& get_rhs() const { return *m_rhs; }
+
+  BinaryOp(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     m_lhs(std::move(lhs)),
     m_rhs(std::move(rhs))
+  {}
+};
+
+class Plus : public BinaryOp
+{
+public:
+  Plus(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -53,21 +77,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  Plus(const Plus&);
-  Plus& operator=(const Plus&);
 };
 
-class Minus : public Expr
+class Minus : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   Minus(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -76,21 +92,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  Minus(const Minus&);
-  Minus& operator=(const Minus&);
 };
 
-class Mult : public Expr
+class Mult : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   Mult(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -99,21 +107,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  Mult(const Mult&);
-  Mult& operator=(const Mult&);
 };
 
-class Div : public Expr
+class Div : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   Div(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -122,21 +122,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  Div(const Div&);
-  Div& operator=(const Div&);
 };
 
-class Modulo : public Expr
+class Modulo : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   Modulo(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -145,21 +137,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  Modulo(const Modulo&);
-  Modulo& operator=(const Modulo&);
 };
 
-class BitwiseAND : public Expr
+class BitwiseAND : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   BitwiseAND(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -168,21 +152,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  BitwiseAND(const BitwiseAND&);
-  BitwiseAND& operator=(const BitwiseAND&);
 };
 
-class BitwiseXOR : public Expr
+class BitwiseXOR : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   BitwiseXOR(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -191,21 +167,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  BitwiseXOR(const BitwiseXOR&);
-  BitwiseXOR& operator=(const BitwiseXOR&);
 };
 
-class BitwiseOR : public Expr
+class BitwiseOR : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   BitwiseOR(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -214,21 +182,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  BitwiseOR(const BitwiseOR&);
-  BitwiseOR& operator=(const BitwiseOR&);
 };
 
-class Equal : public Expr
+class Equal : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   Equal(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -237,21 +197,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  Equal(const Equal&);
-  Equal& operator=(const Equal&);
 };
 
-class NotEqual : public Expr
+class NotEqual : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   NotEqual(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -260,21 +212,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  NotEqual(const NotEqual&);
-  NotEqual& operator=(const NotEqual&);
 };
 
-class LargerThen : public Expr
+class LargerThen : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   LargerThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -283,21 +227,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  LargerThen(const LargerThen&);
-  LargerThen& operator=(const LargerThen&);
 };
 
-class SmallerThen : public Expr
+class SmallerThen : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   SmallerThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -306,21 +242,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  SmallerThen(const SmallerThen&);
-  SmallerThen& operator=(const SmallerThen&);
 };
 
-class SmallerOrEqualThen : public Expr
+class SmallerOrEqualThen : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   SmallerOrEqualThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -329,21 +257,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  SmallerOrEqualThen(const SmallerOrEqualThen&);
-  SmallerOrEqualThen& operator=(const SmallerOrEqualThen&);
 };
 
-class LargerOrEqualThen : public Expr
+class LargerOrEqualThen : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   LargerOrEqualThen(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -352,22 +272,14 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  LargerOrEqualThen(const LargerOrEqualThen&);
-  LargerOrEqualThen& operator=(const LargerOrEqualThen&);
 };
 
 
-class ShiftLeft : public Expr
+class ShiftLeft : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   ShiftLeft(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -376,21 +288,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  ShiftLeft(const ShiftLeft&);
-  ShiftLeft& operator=(const ShiftLeft&);
 };
 
-class ShiftRight : public Expr
+class ShiftRight : public BinaryOp
 {
-  std::unique_ptr<Expr> m_lhs;
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   ShiftRight(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
-    m_lhs(std::move(lhs)),
-    m_rhs(std::move(rhs))
+    BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -399,20 +303,13 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
-
-private:
-  ShiftRight(const ShiftRight&);
-  ShiftRight& operator=(const ShiftRight&);
 };
 
-class LogicalNOT : public Expr
+class LogicalNOT : public UnaryOp
 {
-private:
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   LogicalNOT(std::unique_ptr<Expr>&& rhs) :
-    m_rhs(std::move(rhs))
+    UnaryOp(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -423,14 +320,11 @@ public:
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
 
-class BitwiseNOT : public Expr
+class BitwiseNOT : public UnaryOp
 {
-private:
-  std::unique_ptr<Expr> m_rhs;
-
 public:
   BitwiseNOT(std::unique_ptr<Expr>&& rhs) :
-    m_rhs(std::move(rhs))
+    UnaryOp(std::move(rhs))
   {}
 
   Value eval(const Environment& env) const
@@ -441,6 +335,20 @@ public:
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
 };
 
+class Negate : public UnaryOp
+{
+public:
+  Negate(std::unique_ptr<Expr>&& rhs) :
+    UnaryOp(std::move(rhs))
+  {}
+
+  Value eval(const Environment& env) const
+  {
+    return -m_rhs->eval(env);
+  }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
+};
 
 class Condition : public Expr
 {
@@ -468,24 +376,6 @@ public:
   }
 
   void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr, *m_lhs, *m_rhs); }
-};
-
-class Negate : public Expr
-{
-private:
-  std::unique_ptr<Expr> m_expr;
-
-public:
-  Negate(std::unique_ptr<Expr>&& expr) :
-    m_expr(std::move(expr))
-  {}
-
-  Value eval(const Environment& env) const
-  {
-    return -m_expr->eval(env);
-  }
-
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr); }
 };
 
 class Function : public Expr
@@ -553,10 +443,6 @@ public:
   int get_value() const { return m_value; }
 
   void accept(Visitor& visitor) const { visitor.visit(*this); }
-
-private:
-  Integer(const Integer&);
-  Integer& operator=(const Integer&);
 };
 
 class Real : public Expr
@@ -576,10 +462,6 @@ public:
   float get_value() const { return m_value; }
 
   void accept(Visitor& visitor) const { visitor.visit(*this); }
-
-private:
-  Real(const Real&);
-  Real& operator=(const Real&);
 };
 
 #endif
