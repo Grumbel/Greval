@@ -70,7 +70,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Minus : public BinaryOp
@@ -80,7 +80,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Mult : public BinaryOp
@@ -90,7 +90,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Div : public BinaryOp
@@ -100,7 +100,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Modulo : public BinaryOp
@@ -110,7 +110,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class BitwiseAND : public BinaryOp
@@ -120,7 +120,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class BitwiseXOR : public BinaryOp
@@ -130,7 +130,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class BitwiseOR : public BinaryOp
@@ -140,7 +140,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Equal : public BinaryOp
@@ -150,7 +150,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class NotEqual : public BinaryOp
@@ -160,7 +160,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class LargerThen : public BinaryOp
@@ -170,7 +170,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class SmallerThen : public BinaryOp
@@ -180,7 +180,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class SmallerOrEqualThen : public BinaryOp
@@ -190,7 +190,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class LargerOrEqualThen : public BinaryOp
@@ -200,7 +200,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 
@@ -211,7 +211,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class ShiftRight : public BinaryOp
@@ -221,7 +221,7 @@ public:
     BinaryOp(std::move(lhs), std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_lhs, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class LogicalNOT : public UnaryOp
@@ -231,7 +231,7 @@ public:
     UnaryOp(std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class BitwiseNOT : public UnaryOp
@@ -241,7 +241,7 @@ public:
     UnaryOp(std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Negate : public UnaryOp
@@ -251,11 +251,12 @@ public:
     UnaryOp(std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_rhs); }
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Condition : public Expr
 {
+private:
   std::unique_ptr<Expr> m_expr;
   std::unique_ptr<Expr> m_lhs;
   std::unique_ptr<Expr> m_rhs;
@@ -267,7 +268,11 @@ public:
     m_rhs(std::move(rhs))
   {}
 
-  void accept(Visitor& visitor) const { visitor.visit(*this, *m_expr, *m_lhs, *m_rhs); }
+  const Expr& get_expr() const { return *m_expr; }
+  const Expr& get_lhs() const { return *m_lhs; }
+  const Expr& get_rhs() const { return *m_rhs; }
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
 class Function : public Expr

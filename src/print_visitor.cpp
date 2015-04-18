@@ -26,197 +26,197 @@ PrintVisitor::PrintVisitor(std::ostream& os) :
 }
 
 void
-PrintVisitor::visit(const Plus& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Plus& node)
 {
   m_os << "(+ ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Minus& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Minus& node)
 {
   m_os << "(- ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Mult& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Mult& node)
 {
   m_os << "(* ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Div& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Div& node)
 {
   m_os << "(/ ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Modulo& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Modulo& node)
 {
   m_os << "(% ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const BitwiseAND& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const BitwiseAND& node)
 {
   m_os << "(& ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const BitwiseXOR& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const BitwiseXOR& node)
 {
   m_os << "(^ ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const BitwiseOR& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const BitwiseOR& node)
 {
   m_os << "(| ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Equal& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Equal& node)
 {
   m_os << "(== ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const NotEqual& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const NotEqual& node)
 {
   m_os << "(!= ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const LargerThen& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const LargerThen& node)
 {
   m_os << "(> ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const SmallerThen& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const SmallerThen& node)
 {
   m_os << "(< ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const SmallerOrEqualThen& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const SmallerOrEqualThen& node)
 {
   m_os << "(<= ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const LargerOrEqualThen& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const LargerOrEqualThen& node)
 {
   m_os << "(>= ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const ShiftLeft& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const ShiftLeft& node)
 {
   m_os << "(<< ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const ShiftRight& node, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const ShiftRight& node)
 {
   m_os << "(>> ";
-  lhs.accept(*this);
+  node.get_lhs().accept(*this);
   m_os << " ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const LogicalNOT& node, const Expr& rhs)
+PrintVisitor::visit(const LogicalNOT& node)
 {
   m_os << "(! ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const BitwiseNOT& node, const Expr& rhs)
+PrintVisitor::visit(const BitwiseNOT& node)
 {
   m_os << "(~ ";
-  rhs.accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Condition& node, const Expr& expr, const Expr& lhs, const Expr& rhs)
+PrintVisitor::visit(const Condition& node)
 {
   m_os << "(? ";
-  expr.accept(*this);
+  node.get_expr().accept(*this);
   m_os << " : ";
-  lhs.accept(*this);
-  rhs.accept(*this);
+  node.get_lhs().accept(*this);
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 
 void
-PrintVisitor::visit(const Negate& node, const Expr& rhs)
+PrintVisitor::visit(const Negate& node)
 {
- m_os << "(! ";
-  rhs.accept(*this);
+  m_os << "(! ";
+  node.get_rhs().accept(*this);
   m_os << ")";
 }
 

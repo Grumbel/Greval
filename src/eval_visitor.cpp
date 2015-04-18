@@ -56,135 +56,135 @@ EvalVisitor::get_result() const
   m_stack.push_back(op rhs_value)
 
 void
-EvalVisitor::visit(const Plus& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Plus& node)
 {
-  EVAL_BINARY_OP(+, lhs, rhs);
+  EVAL_BINARY_OP(+, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const Minus& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Minus& node)
 {
-  EVAL_BINARY_OP(-, lhs, rhs);
+  EVAL_BINARY_OP(-, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const Mult& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Mult& node)
 {
-  EVAL_BINARY_OP(*, lhs, rhs);
+  EVAL_BINARY_OP(*, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const Div& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Div& node)
 {
-  EVAL_BINARY_OP(/, lhs, rhs);
+  EVAL_BINARY_OP(/, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const Modulo& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Modulo& node)
 {
-  EVAL_BINARY_OP(%, lhs, rhs);
+  EVAL_BINARY_OP(%, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const BitwiseAND& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const BitwiseAND& node)
 {
-  EVAL_BINARY_OP(&, lhs, rhs);
+  EVAL_BINARY_OP(&, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const BitwiseXOR& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const BitwiseXOR& node)
 {
-  EVAL_BINARY_OP(^, lhs, rhs);
+  EVAL_BINARY_OP(^, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const BitwiseOR& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const BitwiseOR& node)
 {
-  EVAL_BINARY_OP(|, lhs, rhs);
+  EVAL_BINARY_OP(|, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const Equal& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Equal& node)
 {
-  EVAL_BINARY_OP(==, lhs, rhs);
+  EVAL_BINARY_OP(==, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const NotEqual& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const NotEqual& node)
 {
-  EVAL_BINARY_OP(!=, lhs, rhs);
+  EVAL_BINARY_OP(!=, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const LargerThen& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const LargerThen& node)
 {
-  EVAL_BINARY_OP(>, lhs, rhs);
+  EVAL_BINARY_OP(>, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const SmallerThen& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const SmallerThen& node)
 {
-  EVAL_BINARY_OP(<, lhs, rhs);
+  EVAL_BINARY_OP(<, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const SmallerOrEqualThen& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const SmallerOrEqualThen& node)
 {
-  EVAL_BINARY_OP(<=, lhs, rhs);
+  EVAL_BINARY_OP(<=, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const LargerOrEqualThen& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const LargerOrEqualThen& node)
 {
-  EVAL_BINARY_OP(>=, lhs, rhs);
+  EVAL_BINARY_OP(>=, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const ShiftLeft& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const ShiftLeft& node)
 {
-  EVAL_BINARY_OP(<<, lhs, rhs);
+  EVAL_BINARY_OP(<<, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const ShiftRight& node, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const ShiftRight& node)
 {
-  EVAL_BINARY_OP(>>, lhs, rhs);
+  EVAL_BINARY_OP(>>, node.get_lhs(), node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const LogicalNOT& node, const Expr& rhs)
+EvalVisitor::visit(const LogicalNOT& node)
 {
-  EVAL_UNARY_OP(!, rhs);
+  EVAL_UNARY_OP(!, node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const BitwiseNOT& node, const Expr& rhs)
+EvalVisitor::visit(const BitwiseNOT& node)
 {
-  EVAL_UNARY_OP(~, rhs);
+  EVAL_UNARY_OP(~, node.get_rhs());
 }
 
 void
-EvalVisitor::visit(const Condition& node, const Expr& expr, const Expr& lhs, const Expr& rhs)
+EvalVisitor::visit(const Condition& node)
 {
-  expr.accept(*this);
+  node.get_expr().accept(*this);
   assert(!m_stack.empty());
   Value expr_value = m_stack.back();
   m_stack.pop_back();
 
   if (expr_value.get_integer())
   {
-    lhs.accept(*this);
+    node.get_lhs().accept(*this);
   }
   else
   {
-    rhs.accept(*this);
+    node.get_rhs().accept(*this);
   }
 }
 
 void
-EvalVisitor::visit(const Negate& node, const Expr& expr)
+EvalVisitor::visit(const Negate& node)
 {
-  EVAL_UNARY_OP(!, expr);
+  EVAL_UNARY_OP(!, node.get_rhs());
 }
 
 void
