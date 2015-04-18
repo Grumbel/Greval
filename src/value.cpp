@@ -251,7 +251,7 @@ Value::operator!() const
   return Value();
 }
 
-Value::operator void*() const
+Value::operator bool() const
 {
   switch(this->get_type())
   {
@@ -265,7 +265,7 @@ Value::operator void*() const
       return reinterpret_cast<void*>(!m_value.string->empty());
   }
 
-  return Value();
+  return false;
 }
 
 Value
