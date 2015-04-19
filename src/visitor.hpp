@@ -23,6 +23,8 @@ class Minus;
 class Mult;
 class Div;
 class Modulo;
+class LogicalAND;
+class LogicalOR;
 class BitwiseAND;
 class BitwiseXOR;
 class BitwiseOR;
@@ -53,6 +55,8 @@ public:
   virtual void visit(const Mult& node) = 0;
   virtual void visit(const Div& node) = 0;
   virtual void visit(const Modulo& node) = 0;
+  virtual void visit(const LogicalAND& node) = 0;
+  virtual void visit(const LogicalOR& node) = 0;
   virtual void visit(const BitwiseAND& node) = 0;
   virtual void visit(const BitwiseXOR& node) = 0;
   virtual void visit(const BitwiseOR& node) = 0;

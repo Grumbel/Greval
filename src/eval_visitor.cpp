@@ -47,6 +47,19 @@ EvalVisitor::get_result() const
   \
   m_stack.push_back(lhs_value op rhs_value)
 
+#define EVAL_BINARY_FUNC(func, lhs, rhs) \
+  lhs.accept(*this); \
+  assert(!m_stack.empty()); \
+  Value lhs_value = m_stack.back(); \
+  m_stack.pop_back(); \
+  \
+  rhs.accept(*this); \
+  assert(!m_stack.empty()); \
+  Value rhs_value = m_stack.back(); \
+  m_stack.pop_back(); \
+  \
+  m_stack.push_back(lhs_value.func(rhs_value))
+
 #define EVAL_UNARY_OP(op, rhs) \
   rhs.accept(*this); \
   assert(!m_stack.empty()); \
@@ -83,6 +96,18 @@ void
 EvalVisitor::visit(const Modulo& node)
 {
   EVAL_BINARY_OP(%, node.get_lhs(), node.get_rhs());
+}
+
+void
+EvalVisitor::visit(const LogicalAND& node)
+{
+  EVAL_BINARY_FUNC(logical_and, node.get_lhs(), node.get_rhs());
+}
+
+void
+EvalVisitor::visit(const LogicalOR& node)
+{
+  EVAL_BINARY_FUNC(logical_or, node.get_lhs(), node.get_rhs());
 }
 
 void

@@ -76,6 +76,26 @@ PrintVisitor::visit(const Modulo& node)
 }
 
 void
+PrintVisitor::visit(const LogicalAND& node)
+{
+  m_os << "(&& ";
+  node.get_lhs().accept(*this);
+  m_os << " ";
+  node.get_rhs().accept(*this);
+  m_os << ")";
+}
+
+void
+PrintVisitor::visit(const LogicalOR& node)
+{
+  m_os << "(|| ";
+  node.get_lhs().accept(*this);
+  m_os << " ";
+  node.get_rhs().accept(*this);
+  m_os << ")";
+}
+
+void
 PrintVisitor::visit(const BitwiseAND& node)
 {
   m_os << "(& ";

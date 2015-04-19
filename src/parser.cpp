@@ -45,7 +45,7 @@ Parser::expr()
 std::unique_ptr<Expr>
 Parser::conditional_expr()
 {
-  std::unique_ptr<Expr> expr = bitwise_xor();
+  std::unique_ptr<Expr> expr = logical_or();
   while(true)
   {
     switch(get_token_type())
@@ -69,13 +69,39 @@ Parser::conditional_expr()
 std::unique_ptr<Expr>
 Parser::logical_or()
 {
-  return 0;
+  std::unique_ptr<Expr> lhs = logical_and();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kLogicalOR:
+        next_token();
+        lhs = std::make_unique<LogicalOR>(std::move(lhs), logical_and());
+        break;
+
+      default:
+        return lhs;
+    }
+  }
 }
 
 std::unique_ptr<Expr>
 Parser::logical_and()
 {
-  return 0;
+  std::unique_ptr<Expr> lhs = bitwise_or();
+  while(true)
+  {
+    switch(get_token_type())
+    {
+      case Token::kLogicalAND:
+        next_token();
+        lhs = std::make_unique<LogicalAND>(std::move(lhs), bitwise_or());
+        break;
+
+      default:
+        return lhs;
+    }
+  }
 }
 
 std::unique_ptr<Expr>

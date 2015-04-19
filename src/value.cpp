@@ -165,17 +165,19 @@ Value::operator!=(const Value& rhs) const
 {
   return Value::integer(this->get_real() != rhs.get_real());
 }
-/*
+
 Value
-Value::operator&&(const Value& rhs) const
+Value::logical_and(const Value& rhs) const
 {
+  return Value::integer(get_integer() && rhs.get_integer());
 }
 
 Value
-Value::operator||(const Value& rhs) const
+Value::logical_or(const Value& rhs) const
 {
+  return Value::integer(get_integer() || rhs.get_integer());
 }
-*/
+
 Value
 Value::operator&(const Value& rhs) const
 {

@@ -40,6 +40,8 @@ public:
   void visit(const Mult& node);
   void visit(const Div& node);
   void visit(const Modulo& node);
+  void visit(const LogicalAND& node);
+  void visit(const LogicalOR& node);
   void visit(const BitwiseAND& node);
   void visit(const BitwiseXOR& node);
   void visit(const BitwiseOR& node);

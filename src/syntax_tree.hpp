@@ -113,6 +113,27 @@ public:
   void accept(Visitor& visitor) const { visitor.visit(*this); }
 };
 
+class LogicalAND : public BinaryOp
+{
+public:
+  LogicalAND(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    BinaryOp(std::move(lhs), std::move(rhs))
+  {}
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
+};
+
+class LogicalOR : public BinaryOp
+{
+public:
+  LogicalOR(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
+    BinaryOp(std::move(lhs), std::move(rhs))
+  {}
+
+  void accept(Visitor& visitor) const { visitor.visit(*this); }
+};
+
+
 class BitwiseAND : public BinaryOp
 {
 public:
