@@ -31,6 +31,8 @@
               pkgconfig
             ];
             buildInputs = with pkgs; [
+              gtest
+            ] ++ [
               tinycmmc.defaultPackage.${system}
             ];
           };

@@ -50,19 +50,16 @@ target_link_libraries(expr libexpr)
 add_executable(lexer_test src/lexer_test.cpp)
 target_link_libraries(lexer_test libexpr)
 
-# build googletest
-include_directories(SYSTEM external/googletest/include/)
-add_library(gtest STATIC ${CMAKE_CURRENT_SOURCE_DIR}/external/googletest/src/gtest-all.cc)
-target_include_directories(gtest SYSTEM PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/external/googletest/)
-add_library(gtest_main STATIC ${CMAKE_CURRENT_SOURCE_DIR}/external/googletest/src/gtest_main.cc)
+if(BUILD_TESTS)
+  find_package(GTest REQUIRED)
 
-# build test cases
-file(GLOB TEST_EXPR_SOURCES test/*_test.cpp)
-add_executable(test_expr ${TEST_EXPR_SOURCES})
-target_compile_options(test_expr PRIVATE ${WARNINGS_CXX_FLAGS})
-target_link_libraries(test_expr
-  gtest gtest_main
-  libexpr
-  ${CMAKE_THREAD_LIBS_INIT})
+  # build test cases
+  file(GLOB TEST_EXPR_SOURCES test/*_test.cpp)
+  add_executable(test_expr ${TEST_EXPR_SOURCES})
+  target_compile_options(test_expr PRIVATE ${WARNINGS_CXX_FLAGS})
+  target_link_libraries(test_expr
+    GTest::GTest GTest::Main
+    libexpr)
+endif()
 
 # EOF #
