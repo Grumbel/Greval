@@ -17,23 +17,10 @@
 cmake_minimum_required(VERSION 3.0)
 project(expr VERSION 0.1.0)
 
-add_compile_options(-std=c++1y)
-
-set(WARNINGS 0 CACHE BOOL "Switch on extra warnings")
-
-if(WARNINGS)
-  set(WARNINGS_CXX_FLAGS
-    -pedantic -Wall -Wextra -Wno-c++0x-compat -Wnon-virtual-dtor -Weffc++
-    -Wconversion -Werror -Wshadow -Wcast-qual -Winit-self -Wno-unused-parameter)
-  # -Winline -Wfloat-equal -Wunreachable-code
-endif()
-
-find_package(Threads REQUIRED)
-
-include_directories(src/)
+include(mk/cmake/TinyCMMC.cmake)
 
 # build expr
-add_library(libexpr STATIC
+add_library(expr STATIC
   src/lexer.cpp
   src/parser.cpp
   src/token.cpp
@@ -41,14 +28,15 @@ add_library(libexpr STATIC
   src/environment.cpp
   src/print_visitor.cpp
   src/eval_visitor.cpp)
-set_target_properties(libexpr PROPERTIES OUTPUT_NAME "expr")
+target_include_directories(expr PUBLIC src)
 
-add_executable(expr
+add_executable(expr_exe
   src/expr.cpp)
-target_link_libraries(expr libexpr)
+set_target_properties(expr PROPERTIES OUTPUT_NAME "expr")
+target_link_libraries(expr_exe expr)
 
 add_executable(lexer_test src/lexer_test.cpp)
-target_link_libraries(lexer_test libexpr)
+target_link_libraries(lexer_test expr)
 
 if(BUILD_TESTS)
   find_package(GTest REQUIRED)
@@ -59,7 +47,9 @@ if(BUILD_TESTS)
   target_compile_options(test_expr PRIVATE ${WARNINGS_CXX_FLAGS})
   target_link_libraries(test_expr
     GTest::GTest GTest::Main
-    libexpr)
+    expr)
 endif()
+
+install(TARGETS expr_exe)
 
 # EOF #

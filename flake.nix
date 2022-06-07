@@ -12,23 +12,14 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        tinylib = tinycmmc.lib { inherit nixpkgs; };
       in rec {
         packages = flake-utils.lib.flattenTree {
           expr = pkgs.stdenv.mkDerivation {
             pname = "expr";
-            version = tinylib.version_from_file self;
+            version = tinycmmc.lib.versionFromFile self;
             src = nixpkgs.lib.cleanSource ./.;
-            cmakeFlags = [ "-DBUILD_EXTRA=ON" ];
-            postFixup = ''
-              wrapProgram $out/libexec/expr \
-                --prefix LIBGL_DRIVERS_PATH ":" "${pkgs.mesa.drivers}/lib/dri" \
-                --prefix LD_LIBRARY_PATH ":" "${pkgs.mesa.drivers}/lib"
-            '';
             nativeBuildInputs = with pkgs; [
               cmake
-              makeWrapper
-              pkgconfig
             ];
             buildInputs = with pkgs; [
               gtest
