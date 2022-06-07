@@ -32,7 +32,7 @@ add_library(expr STATIC
 target_include_directories(expr PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/expr>
   $<INSTALL_INTERFACE:include>)
-target_compile_options(expr ${TINYCMMC_WARNINGS_CXX_FLAGS})
+target_compile_options(expr PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
 set_target_properties(expr PROPERTIES PUBLIC_HEADER
   "${EXPR_HEADERS}")
 
@@ -40,7 +40,7 @@ add_executable(expr_exe
   src/expr.cpp)
 set_target_properties(expr_exe PROPERTIES OUTPUT_NAME "expr")
 target_link_libraries(expr_exe expr)
-target_compile_options(expr_exe ${TINYCMMC_WARNINGS_CXX_FLAGS})
+target_compile_options(expr_exe PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
 
 add_executable(lexer_test src/lexer_test.cpp)
 target_link_libraries(lexer_test expr)

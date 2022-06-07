@@ -18,6 +18,10 @@
             pname = "expr";
             version = tinycmmc.lib.versionFromFile self;
             src = nixpkgs.lib.cleanSource ./.;
+            cmakeFlags = [
+              "-DWARNINGS=ON"
+              "-DWERROR=ON"
+            ];
             nativeBuildInputs = with pkgs; [
               cmake
             ];
