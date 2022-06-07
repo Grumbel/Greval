@@ -22,7 +22,7 @@
 class Token
 {
 public:
-  enum Type {
+  enum class Type {
     kInteger,
     kReal,
     kString,
@@ -56,7 +56,7 @@ public:
 
 public:
   Token() :
-    m_type(kEOF),
+    m_type(Token::Type::kEOF),
     m_value()
   {}
 
@@ -90,7 +90,7 @@ public:
     m_type(rhs.m_type),
     m_value(rhs.m_value)
   {
-    if (rhs.m_type == kString)
+    if (rhs.m_type == Token::Type::kString)
     {
       m_value.string = new std::string(*rhs.m_value.string);
     }
@@ -98,7 +98,7 @@ public:
 
   ~Token()
   {
-    if (m_type == kString)
+    if (m_type == Token::Type::kString)
     {
       delete m_value.string;
     }
@@ -110,7 +110,7 @@ public:
     {
       m_type = rhs.m_type;
 
-      if (rhs.m_type == kString)
+      if (rhs.m_type == Token::Type::kString)
       {
         m_value.string = new std::string(*rhs.m_value.string);
       }
@@ -138,43 +138,43 @@ private:
   } m_value;
 
 public:
-  static Token minus() { return Token(kMinus); }
-  static Token plus()  { return Token(kPlus);  }
-  static Token mult()  { return Token(kMult);  }
-  static Token div()   { return Token(kDiv);   }
-  static Token modulo()   { return Token(kModulo);   }
-  static Token shift_left()   { return Token(kShiftLeft);   }
-  static Token shift_right()  { return Token(kShiftRight);  }
-  static Token parent_left()  { return Token(kParentLeft);  }
-  static Token parent_right() { return Token(kParentRight); }
+  static Token minus() { return Token(Token::Type::kMinus); }
+  static Token plus()  { return Token(Token::Type::kPlus);  }
+  static Token mult()  { return Token(Token::Type::kMult);  }
+  static Token div()   { return Token(Token::Type::kDiv);   }
+  static Token modulo()   { return Token(Token::Type::kModulo);   }
+  static Token shift_left()   { return Token(Token::Type::kShiftLeft);   }
+  static Token shift_right()  { return Token(Token::Type::kShiftRight);  }
+  static Token parent_left()  { return Token(Token::Type::kParentLeft);  }
+  static Token parent_right() { return Token(Token::Type::kParentRight); }
 
-  static Token bitwise_not() { return Token(kBitwiseNOT); }
-  static Token bitwise_or() { return Token(kBitwiseOR); }
-  static Token bitwise_xor() { return Token(kBitwiseXOR); }
-  static Token bitwise_and() { return Token(kBitwiseAND); }
+  static Token bitwise_not() { return Token(Token::Type::kBitwiseNOT); }
+  static Token bitwise_or() { return Token(Token::Type::kBitwiseOR); }
+  static Token bitwise_xor() { return Token(Token::Type::kBitwiseXOR); }
+  static Token bitwise_and() { return Token(Token::Type::kBitwiseAND); }
 
-  static Token logical_not() { return Token(kLogicalNOT); }
-  static Token logical_and() { return Token(kLogicalAND); }
-  static Token logical_or() { return Token(kLogicalOR); }
+  static Token logical_not() { return Token(Token::Type::kLogicalNOT); }
+  static Token logical_and() { return Token(Token::Type::kLogicalAND); }
+  static Token logical_or() { return Token(Token::Type::kLogicalOR); }
 
-  static Token larger_then() { return Token(kLargerThen); }
-  static Token larger_or_equal_then() { return Token(kLargerOrEqualThen); }
+  static Token larger_then() { return Token(Token::Type::kLargerThen); }
+  static Token larger_or_equal_then() { return Token(Token::Type::kLargerOrEqualThen); }
 
-  static Token smaller_then() { return Token(kSmallerThen); }
-  static Token smaller_or_equal_then() { return Token(kSmallerOrEqualThen); }
+  static Token smaller_then() { return Token(Token::Type::kSmallerThen); }
+  static Token smaller_or_equal_then() { return Token(Token::Type::kSmallerOrEqualThen); }
 
-  static Token equal() { return Token(kEqual); }
-  static Token not_equal() { return Token(kNotEqual); }
+  static Token equal() { return Token(Token::Type::kEqual); }
+  static Token not_equal() { return Token(Token::Type::kNotEqual); }
 
-  static Token questionmark() { return Token(kQuestionmark); }
-  static Token colon() { return Token(kColon); }
-  static Token comma() { return Token(kComma); }
+  static Token questionmark() { return Token(Token::Type::kQuestionmark); }
+  static Token colon() { return Token(Token::Type::kColon); }
+  static Token comma() { return Token(Token::Type::kComma); }
 
-  static Token integer(int num) { return Token(kInteger, num); }
-  static Token real(float num)  { return Token(kReal,    num); }
-  static Token string(const std::string& str)  { return Token(kString, str); }
+  static Token integer(int num) { return Token(Token::Type::kInteger, num); }
+  static Token real(float num)  { return Token(Token::Type::kReal,    num); }
+  static Token string(const std::string& str)  { return Token(Token::Type::kString, str); }
 
-  static Token eof()            { return Token(kEOF); }
+  static Token eof()            { return Token(Token::Type::kEOF); }
 };
 
 std::ostream& operator<<(std::ostream& os, const Token& token);

@@ -29,32 +29,32 @@ private:
 public:
   PrintVisitor(std::ostream& os);
 
-  void visit(const Plus& node);
-  void visit(const Minus& node);
-  void visit(const Mult& node);
-  void visit(const Div& node);
-  void visit(const Modulo& node);
-  void visit(const LogicalAND& node);
-  void visit(const LogicalOR& node);
-  void visit(const BitwiseAND& node);
-  void visit(const BitwiseXOR& node);
-  void visit(const BitwiseOR& node);
-  void visit(const Equal& node);
-  void visit(const NotEqual& node);
-  void visit(const LargerThen& node);
-  void visit(const SmallerThen& node);
-  void visit(const SmallerOrEqualThen& node);
-  void visit(const LargerOrEqualThen& node);
-  void visit(const ShiftLeft& node);
-  void visit(const ShiftRight& node);
-  void visit(const LogicalNOT& node);
-  void visit(const BitwiseNOT& node);
-  void visit(const Condition& node);
-  void visit(const Negate& node);
-  void visit(const Function& node);
-  void visit(const Variable& node);
-  void visit(const Integer& node);
-  void visit(const Real& node);
+  void visit(const Plus& node) override;
+  void visit(const Minus& node) override;
+  void visit(const Mult& node) override;
+  void visit(const Div& node) override;
+  void visit(const Modulo& node) override;
+  void visit(const LogicalAND& node) override;
+  void visit(const LogicalOR& node) override;
+  void visit(const BitwiseAND& node) override;
+  void visit(const BitwiseXOR& node) override;
+  void visit(const BitwiseOR& node) override;
+  void visit(const Equal& node) override;
+  void visit(const NotEqual& node) override;
+  void visit(const LargerThen& node) override;
+  void visit(const SmallerThen& node) override;
+  void visit(const SmallerOrEqualThen& node) override;
+  void visit(const LargerOrEqualThen& node) override;
+  void visit(const ShiftLeft& node) override;
+  void visit(const ShiftRight& node) override;
+  void visit(const LogicalNOT& node) override;
+  void visit(const BitwiseNOT& node) override;
+  void visit(const Condition& node) override;
+  void visit(const Negate& node) override;
+  void visit(const Function& node) override;
+  void visit(const Variable& node) override;
+  void visit(const Integer& node) override;
+  void visit(const Real& node) override;
 };
 
 #endif

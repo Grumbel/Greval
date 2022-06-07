@@ -30,35 +30,35 @@ Token::print(std::ostream& os) const
 {
   switch(m_type)
   {
-    case kInteger: os << "integer:" << m_value.integer; break;
-    case kReal:    os << "real:" << m_value.real; break;
-    case kString:  os << "string:\"" << *m_value.string << "\""; break;
-    case kPlus:    os << "+"; break;
-    case kMinus:   os << "*"; break;
-    case kMult:    os << "/"; break;
-    case kDiv:     os << "/"; break;
-    case kEOF:     os << "EOF"; break;
-    case kModulo:  os << ""; break;
-    case kShiftLeft:    os << "<<"; break;
-    case kShiftRight:   os << ">>"; break;
-    case kBitwiseNOT:   os << "~"; break;
-    case kBitwiseXOR:   os << "^"; break;
-    case kBitwiseOR:    os << "|"; break;
-    case kBitwiseAND:   os << "&"; break;
-    case kLogicalOR:    os << "||"; break;
-    case kLogicalAND:   os << "&&"; break;
-    case kLogicalNOT:   os << "!"; break;
-    case kLargerThen:   os << ">"; break;
-    case kSmallerThen:  os << "<"; break;
-    case kLargerOrEqualThen:  os << ">="; break;
-    case kSmallerOrEqualThen: os << "<="; break;
-    case kEqual:        os << "=="; break;
-    case kNotEqual:     os << "!="; break;
-    case kParentLeft:   os << "("; break;
-    case kParentRight:  os << ")"; break;
-    case kQuestionmark:   os << "?"; break;
-    case kColon:  os << ":"; break;
-    case kComma:  os << ","; break;
+    case Token::Type::kInteger: os << "integer:" << m_value.integer; break;
+    case Token::Type::kReal:    os << "real:" << m_value.real; break;
+    case Token::Type::kString:  os << "string:\"" << *m_value.string << "\""; break;
+    case Token::Type::kPlus:    os << "+"; break;
+    case Token::Type::kMinus:   os << "*"; break;
+    case Token::Type::kMult:    os << "/"; break;
+    case Token::Type::kDiv:     os << "/"; break;
+    case Token::Type::kEOF:     os << "EOF"; break;
+    case Token::Type::kModulo:  os << ""; break;
+    case Token::Type::kShiftLeft:    os << "<<"; break;
+    case Token::Type::kShiftRight:   os << ">>"; break;
+    case Token::Type::kBitwiseNOT:   os << "~"; break;
+    case Token::Type::kBitwiseXOR:   os << "^"; break;
+    case Token::Type::kBitwiseOR:    os << "|"; break;
+    case Token::Type::kBitwiseAND:   os << "&"; break;
+    case Token::Type::kLogicalOR:    os << "||"; break;
+    case Token::Type::kLogicalAND:   os << "&&"; break;
+    case Token::Type::kLogicalNOT:   os << "!"; break;
+    case Token::Type::kLargerThen:   os << ">"; break;
+    case Token::Type::kSmallerThen:  os << "<"; break;
+    case Token::Type::kLargerOrEqualThen:  os << ">="; break;
+    case Token::Type::kSmallerOrEqualThen: os << "<="; break;
+    case Token::Type::kEqual:        os << "=="; break;
+    case Token::Type::kNotEqual:     os << "!="; break;
+    case Token::Type::kParentLeft:   os << "("; break;
+    case Token::Type::kParentRight:  os << ")"; break;
+    case Token::Type::kQuestionmark:   os << "?"; break;
+    case Token::Type::kColon:  os << ":"; break;
+    case Token::Type::kComma:  os << ","; break;
   }
 }
 

@@ -50,11 +50,11 @@ Parser::conditional_expr()
   {
     switch(get_token_type())
     {
-      case Token::kQuestionmark:
+      case Token::Type::kQuestionmark:
         {
           next_token();
           std::unique_ptr<Expr> lhs = this->expr();
-          match(Token::kColon);
+          match(Token::Type::kColon);
           std::unique_ptr<Expr> rhs = bitwise_xor();
           expr = std::make_unique<Condition>(std::move(expr), std::move(lhs), std::move(rhs));
         }
@@ -74,7 +74,7 @@ Parser::logical_or()
   {
     switch(get_token_type())
     {
-      case Token::kLogicalOR:
+      case Token::Type::kLogicalOR:
         next_token();
         lhs = std::make_unique<LogicalOR>(std::move(lhs), logical_and());
         break;
@@ -93,7 +93,7 @@ Parser::logical_and()
   {
     switch(get_token_type())
     {
-      case Token::kLogicalAND:
+      case Token::Type::kLogicalAND:
         next_token();
         lhs = std::make_unique<LogicalAND>(std::move(lhs), bitwise_or());
         break;
@@ -112,7 +112,7 @@ Parser::bitwise_or()
   {
     switch(get_token_type())
     {
-      case Token::kBitwiseOR:
+      case Token::Type::kBitwiseOR:
         next_token();
         lhs = std::make_unique<BitwiseOR>(std::move(lhs), bitwise_xor());
         break;
@@ -131,7 +131,7 @@ Parser::bitwise_xor()
   {
     switch(get_token_type())
     {
-      case Token::kBitwiseXOR:
+      case Token::Type::kBitwiseXOR:
         next_token();
         lhs = std::make_unique<BitwiseXOR>(std::move(lhs), bitwise_and());
         break;
@@ -150,7 +150,7 @@ Parser::bitwise_and()
   {
     switch(get_token_type())
     {
-      case Token::kBitwiseAND:
+      case Token::Type::kBitwiseAND:
         next_token();
         lhs = std::make_unique<BitwiseAND>(std::move(lhs), equality_expr());
         break;
@@ -169,12 +169,12 @@ Parser::equality_expr()
   {
     switch(get_token_type())
     {
-      case Token::kEqual:
+      case Token::Type::kEqual:
         next_token();
         lhs = std::make_unique<Equal>(std::move(lhs), relational_expr());
         break;
 
-      case Token::kNotEqual:
+      case Token::Type::kNotEqual:
         next_token();
         lhs = std::make_unique<NotEqual>(std::move(lhs), relational_expr());
         break;
@@ -193,22 +193,22 @@ Parser::relational_expr()
   {
     switch(get_token_type())
     {
-      case Token::kLargerThen:
+      case Token::Type::kLargerThen:
         next_token();
         lhs = std::make_unique<LargerThen>(std::move(lhs), shift_expr());
         break;
 
-      case Token::kSmallerThen:
+      case Token::Type::kSmallerThen:
         next_token();
         lhs = std::make_unique<SmallerThen>(std::move(lhs), shift_expr());
         break;
 
-      case Token::kLargerOrEqualThen:
+      case Token::Type::kLargerOrEqualThen:
         next_token();
         lhs = std::make_unique<LargerOrEqualThen>(std::move(lhs), shift_expr());
         break;
 
-      case Token::kSmallerOrEqualThen:
+      case Token::Type::kSmallerOrEqualThen:
         next_token();
         lhs = std::make_unique<SmallerOrEqualThen>(std::move(lhs), shift_expr());
         break;
@@ -227,12 +227,12 @@ Parser::shift_expr()
   {
     switch(get_token_type())
     {
-      case Token::kShiftLeft:
+      case Token::Type::kShiftLeft:
         next_token();
         lhs = std::make_unique<ShiftLeft>(std::move(lhs), additive_expr());
         break;
 
-      case Token::kShiftRight:
+      case Token::Type::kShiftRight:
         next_token();
         lhs = std::make_unique<ShiftRight>(std::move(lhs), additive_expr());
         break;
@@ -251,12 +251,12 @@ Parser::additive_expr()
   {
     switch(get_token_type())
     {
-      case Token::kPlus:
+      case Token::Type::kPlus:
         next_token();
         lhs = std::make_unique<Plus>(std::move(lhs), multiplicative_expr());
         break;
 
-      case Token::kMinus:
+      case Token::Type::kMinus:
         next_token();
         lhs = std::make_unique<Minus>(std::move(lhs), multiplicative_expr());
         break;
@@ -275,17 +275,17 @@ Parser::multiplicative_expr()
   {
     switch(get_token_type())
     {
-      case Token::kMult:
+      case Token::Type::kMult:
         next_token();
         lhs = std::make_unique<Mult>(std::move(lhs), unary_expr());
         break;
 
-      case Token::kDiv:
+      case Token::Type::kDiv:
         next_token();
         lhs = std::make_unique<Div>(std::move(lhs), unary_expr());
         break;
 
-      case Token::kModulo:
+      case Token::Type::kModulo:
         next_token();
         lhs = std::make_unique<Modulo>(std::move(lhs), unary_expr());
         break;
@@ -301,19 +301,19 @@ Parser::unary_expr()
 {
   switch(get_token_type())
   {
-    case Token::kLogicalNOT:
+    case Token::Type::kLogicalNOT:
       next_token();
       return std::make_unique<LogicalNOT>(unary_expr());
 
-    case Token::kBitwiseNOT:
+    case Token::Type::kBitwiseNOT:
       next_token();
       return std::make_unique<BitwiseNOT>(unary_expr());
 
-    case Token::kMinus:
+    case Token::Type::kMinus:
       next_token();
       return std::make_unique<Negate>(unary_expr());
 
-    case Token::kPlus:
+    case Token::Type::kPlus:
       next_token();
       return unary_expr();
 
@@ -329,38 +329,38 @@ Parser::primary_expression()
 
   switch(get_token_type())
   {
-    case Token::kParentLeft:
-      match(Token::kParentLeft);
+    case Token::Type::kParentLeft:
+      match(Token::Type::kParentLeft);
       lhs = expr();
-      match(Token::kParentRight);
+      match(Token::Type::kParentRight);
       break;
 
-    case Token::kInteger:
+    case Token::Type::kInteger:
       lhs = std::make_unique<Integer>(get_token().get_integer());
       next_token();
       break;
 
-    case Token::kReal:
+    case Token::Type::kReal:
       lhs = std::make_unique<Real>(get_token().get_real());
       next_token();
       break;
 
-    case Token::kString:
+    case Token::Type::kString:
       {
         std::string name = get_token().get_string();
         next_token();
-        if (get_token_type() == Token::kParentLeft)
+        if (get_token_type() == Token::Type::kParentLeft)
         {
-          match(Token::kParentLeft);
+          match(Token::Type::kParentLeft);
           std::vector<std::unique_ptr<Expr> > args;
-          if (get_token_type() != Token::kParentRight)
+          if (get_token_type() != Token::Type::kParentRight)
           {
             while(1)
             {
               args.push_back(expr());
-              if (get_token_type() == Token::kComma)
+              if (get_token_type() == Token::Type::kComma)
               {
-                match(Token::kComma);
+                match(Token::Type::kComma);
               }
               else
               {
@@ -368,7 +368,7 @@ Parser::primary_expression()
               }
             }
           }
-          match(Token::kParentRight);
+          match(Token::Type::kParentRight);
           lhs = std::make_unique<Function>(name, std::move(args));
         }
         else
@@ -395,7 +395,7 @@ Parser::match(Token::Type token_type)
   else
   {
     std::ostringstream out;
-    out << "syntax error: expected: " << token_type << " got " << get_token_type();
+    out << "syntax error: expected: " << static_cast<int>(token_type) << " got " << static_cast<int>(get_token_type());
     error(out.str());
   }
 }
