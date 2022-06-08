@@ -403,7 +403,7 @@ Parser::match(Token::Type token_type)
 }
 
 void
-Parser::error(const std::string& msg)
+Parser::error(std::string const& msg)
 {
   throw std::runtime_error(msg);
 }

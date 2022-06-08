@@ -28,7 +28,7 @@ PrintVisitor::PrintVisitor(std::ostream& os) :
 }
 
 void
-PrintVisitor::visit(const Plus& node)
+PrintVisitor::visit(Plus const& node)
 {
   m_os << "(+ ";
   node.get_lhs().accept(*this);
@@ -38,7 +38,7 @@ PrintVisitor::visit(const Plus& node)
 }
 
 void
-PrintVisitor::visit(const Minus& node)
+PrintVisitor::visit(Minus const& node)
 {
   m_os << "(- ";
   node.get_lhs().accept(*this);
@@ -48,7 +48,7 @@ PrintVisitor::visit(const Minus& node)
 }
 
 void
-PrintVisitor::visit(const Mult& node)
+PrintVisitor::visit(Mult const& node)
 {
   m_os << "(* ";
   node.get_lhs().accept(*this);
@@ -58,7 +58,7 @@ PrintVisitor::visit(const Mult& node)
 }
 
 void
-PrintVisitor::visit(const Div& node)
+PrintVisitor::visit(Div const& node)
 {
   m_os << "(/ ";
   node.get_lhs().accept(*this);
@@ -68,7 +68,7 @@ PrintVisitor::visit(const Div& node)
 }
 
 void
-PrintVisitor::visit(const Modulo& node)
+PrintVisitor::visit(Modulo const& node)
 {
   m_os << "(% ";
   node.get_lhs().accept(*this);
@@ -78,7 +78,7 @@ PrintVisitor::visit(const Modulo& node)
 }
 
 void
-PrintVisitor::visit(const LogicalAND& node)
+PrintVisitor::visit(LogicalAND const& node)
 {
   m_os << "(&& ";
   node.get_lhs().accept(*this);
@@ -88,7 +88,7 @@ PrintVisitor::visit(const LogicalAND& node)
 }
 
 void
-PrintVisitor::visit(const LogicalOR& node)
+PrintVisitor::visit(LogicalOR const& node)
 {
   m_os << "(|| ";
   node.get_lhs().accept(*this);
@@ -98,7 +98,7 @@ PrintVisitor::visit(const LogicalOR& node)
 }
 
 void
-PrintVisitor::visit(const BitwiseAND& node)
+PrintVisitor::visit(BitwiseAND const& node)
 {
   m_os << "(& ";
   node.get_lhs().accept(*this);
@@ -108,7 +108,7 @@ PrintVisitor::visit(const BitwiseAND& node)
 }
 
 void
-PrintVisitor::visit(const BitwiseXOR& node)
+PrintVisitor::visit(BitwiseXOR const& node)
 {
   m_os << "(^ ";
   node.get_lhs().accept(*this);
@@ -118,7 +118,7 @@ PrintVisitor::visit(const BitwiseXOR& node)
 }
 
 void
-PrintVisitor::visit(const BitwiseOR& node)
+PrintVisitor::visit(BitwiseOR const& node)
 {
   m_os << "(| ";
   node.get_lhs().accept(*this);
@@ -128,7 +128,7 @@ PrintVisitor::visit(const BitwiseOR& node)
 }
 
 void
-PrintVisitor::visit(const Equal& node)
+PrintVisitor::visit(Equal const& node)
 {
   m_os << "(== ";
   node.get_lhs().accept(*this);
@@ -138,7 +138,7 @@ PrintVisitor::visit(const Equal& node)
 }
 
 void
-PrintVisitor::visit(const NotEqual& node)
+PrintVisitor::visit(NotEqual const& node)
 {
   m_os << "(!= ";
   node.get_lhs().accept(*this);
@@ -148,7 +148,7 @@ PrintVisitor::visit(const NotEqual& node)
 }
 
 void
-PrintVisitor::visit(const LargerThen& node)
+PrintVisitor::visit(LargerThen const& node)
 {
   m_os << "(> ";
   node.get_lhs().accept(*this);
@@ -158,7 +158,7 @@ PrintVisitor::visit(const LargerThen& node)
 }
 
 void
-PrintVisitor::visit(const SmallerThen& node)
+PrintVisitor::visit(SmallerThen const& node)
 {
   m_os << "(< ";
   node.get_lhs().accept(*this);
@@ -168,7 +168,7 @@ PrintVisitor::visit(const SmallerThen& node)
 }
 
 void
-PrintVisitor::visit(const SmallerOrEqualThen& node)
+PrintVisitor::visit(SmallerOrEqualThen const& node)
 {
   m_os << "(<= ";
   node.get_lhs().accept(*this);
@@ -178,7 +178,7 @@ PrintVisitor::visit(const SmallerOrEqualThen& node)
 }
 
 void
-PrintVisitor::visit(const LargerOrEqualThen& node)
+PrintVisitor::visit(LargerOrEqualThen const& node)
 {
   m_os << "(>= ";
   node.get_lhs().accept(*this);
@@ -188,7 +188,7 @@ PrintVisitor::visit(const LargerOrEqualThen& node)
 }
 
 void
-PrintVisitor::visit(const ShiftLeft& node)
+PrintVisitor::visit(ShiftLeft const& node)
 {
   m_os << "(<< ";
   node.get_lhs().accept(*this);
@@ -198,7 +198,7 @@ PrintVisitor::visit(const ShiftLeft& node)
 }
 
 void
-PrintVisitor::visit(const ShiftRight& node)
+PrintVisitor::visit(ShiftRight const& node)
 {
   m_os << "(>> ";
   node.get_lhs().accept(*this);
@@ -208,7 +208,7 @@ PrintVisitor::visit(const ShiftRight& node)
 }
 
 void
-PrintVisitor::visit(const LogicalNOT& node)
+PrintVisitor::visit(LogicalNOT const& node)
 {
   m_os << "(! ";
   node.get_rhs().accept(*this);
@@ -216,7 +216,7 @@ PrintVisitor::visit(const LogicalNOT& node)
 }
 
 void
-PrintVisitor::visit(const BitwiseNOT& node)
+PrintVisitor::visit(BitwiseNOT const& node)
 {
   m_os << "(~ ";
   node.get_rhs().accept(*this);
@@ -224,7 +224,7 @@ PrintVisitor::visit(const BitwiseNOT& node)
 }
 
 void
-PrintVisitor::visit(const Condition& node)
+PrintVisitor::visit(Condition const& node)
 {
   m_os << "(? ";
   node.get_expr().accept(*this);
@@ -235,7 +235,7 @@ PrintVisitor::visit(const Condition& node)
 }
 
 void
-PrintVisitor::visit(const Negate& node)
+PrintVisitor::visit(Negate const& node)
 {
   m_os << "(- ";
   node.get_rhs().accept(*this);
@@ -243,10 +243,10 @@ PrintVisitor::visit(const Negate& node)
 }
 
 void
-PrintVisitor::visit(const Function& node)
+PrintVisitor::visit(Function const& node)
 {
   m_os << "(" << node.get_name();
-  for(const auto& arg : node.get_args())
+  for(auto const& arg : node.get_args())
   {
     m_os << " ";
     arg->accept(*this);
@@ -255,19 +255,19 @@ PrintVisitor::visit(const Function& node)
 }
 
 void
-PrintVisitor::visit(const Variable& node)
+PrintVisitor::visit(Variable const& node)
 {
   m_os << node.get_name();
 }
 
 void
-PrintVisitor::visit(const Integer& node)
+PrintVisitor::visit(Integer const& node)
 {
   m_os << node.get_value();
 }
 
 void
-PrintVisitor::visit(const Real& node)
+PrintVisitor::visit(Real const& node)
 {
   m_os << node.get_value();
 }

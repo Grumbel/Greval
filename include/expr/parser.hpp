@@ -52,15 +52,15 @@ private:
   std::unique_ptr<Expr> primary_expression();
   void match(Token::Type token_type);
 
-  void error(const std::string& msg);
+  void error(std::string const& msg);
 
   Token::Type get_token_type(int lookahead = 0);
   Token get_token(int lookahead = 0);
   void  next_token();
 
 private:
-  Parser(const Parser&);
-  Parser& operator=(const Parser&);
+  Parser(Parser const&);
+  Parser& operator=(Parser const&);
 };
 
 } // namespace expr

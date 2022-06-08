@@ -39,7 +39,7 @@ int lexer_run(int argc, char** argv)
       }
       return EXIT_SUCCESS;
     }
-    catch(const std::exception& err)
+    catch(std::exception const& err)
     {
       std::cerr << "error: " << err.what() << std::endl;
       return EXIT_FAILURE;

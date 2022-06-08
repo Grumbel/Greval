@@ -35,14 +35,14 @@ Value::print(std::ostream& os) const
   }
 }
 
-std::ostream& operator<<(std::ostream& os, const Value& value)
+std::ostream& operator<<(std::ostream& os, Value const& value)
 {
   value.print(os);
   return os;
 }
 
 Value
-Value::operator+(const Value& rhs) const
+Value::operator+(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -55,7 +55,7 @@ Value::operator+(const Value& rhs) const
 }
 
 Value
-Value::operator-(const Value& rhs) const
+Value::operator-(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -68,7 +68,7 @@ Value::operator-(const Value& rhs) const
 }
 
 Value
-Value::operator*(const Value& rhs) const
+Value::operator*(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -81,7 +81,7 @@ Value::operator*(const Value& rhs) const
 }
 
 Value
-Value::operator/(const Value& rhs) const
+Value::operator/(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -94,7 +94,7 @@ Value::operator/(const Value& rhs) const
 }
 
 Value
-Value::operator%(const Value& rhs) const
+Value::operator%(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -107,7 +107,7 @@ Value::operator%(const Value& rhs) const
 }
 
 Value
-Value::operator<<(const Value& rhs) const
+Value::operator<<(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -120,7 +120,7 @@ Value::operator<<(const Value& rhs) const
 }
 
 Value
-Value::operator>>(const Value& rhs) const
+Value::operator>>(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -133,55 +133,55 @@ Value::operator>>(const Value& rhs) const
 }
 
 Value
-Value::operator<(const Value& rhs) const
+Value::operator<(Value const& rhs) const
 {
   return Value::integer(this->get_real() < rhs.get_real());
 }
 
 Value
-Value::operator>(const Value& rhs) const
+Value::operator>(Value const& rhs) const
 {
   return Value::integer(this->get_real() > rhs.get_real());
 }
 
 Value
-Value::operator<=(const Value& rhs) const
+Value::operator<=(Value const& rhs) const
 {
   return Value::integer(this->get_real() <= rhs.get_real());
 }
 
 Value
-Value::operator>=(const Value& rhs) const
+Value::operator>=(Value const& rhs) const
 {
   return Value::integer(this->get_real() >= rhs.get_real());
 }
 
 Value
-Value::operator==(const Value& rhs) const
+Value::operator==(Value const& rhs) const
 {
   return Value::integer(this->get_real() == rhs.get_real());
 }
 
 Value
-Value::operator!=(const Value& rhs) const
+Value::operator!=(Value const& rhs) const
 {
   return Value::integer(this->get_real() != rhs.get_real());
 }
 
 Value
-Value::logical_and(const Value& rhs) const
+Value::logical_and(Value const& rhs) const
 {
   return Value::integer(get_integer() && rhs.get_integer());
 }
 
 Value
-Value::logical_or(const Value& rhs) const
+Value::logical_or(Value const& rhs) const
 {
   return Value::integer(get_integer() || rhs.get_integer());
 }
 
 Value
-Value::operator&(const Value& rhs) const
+Value::operator&(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -194,7 +194,7 @@ Value::operator&(const Value& rhs) const
 }
 
 Value
-Value::operator^(const Value& rhs) const
+Value::operator^(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {
@@ -207,7 +207,7 @@ Value::operator^(const Value& rhs) const
 }
 
 Value
-Value::operator|(const Value& rhs) const
+Value::operator|(Value const& rhs) const
 {
   if (this->get_type() == kInteger && rhs.get_type() == kInteger)
   {

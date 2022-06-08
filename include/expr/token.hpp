@@ -76,7 +76,7 @@ public:
     m_value.integer = num;
   }
 
-  Token(Type type, const std::string& str) :
+  Token(Type type, std::string const& str) :
     m_type(type),
     m_value()
   {
@@ -88,7 +88,7 @@ public:
     m_value()
   {}
 
-  Token(const Token& rhs) :
+  Token(Token const& rhs) :
     m_type(rhs.m_type),
     m_value(rhs.m_value)
   {
@@ -106,7 +106,7 @@ public:
     }
   }
 
-  Token& operator=(const Token& rhs)
+  Token& operator=(Token const& rhs)
   {
     if (this != &rhs)
     {
@@ -174,12 +174,12 @@ public:
 
   static Token integer(int num) { return Token(Token::Type::kInteger, num); }
   static Token real(float num)  { return Token(Token::Type::kReal,    num); }
-  static Token string(const std::string& str)  { return Token(Token::Type::kString, str); }
+  static Token string(std::string const& str)  { return Token(Token::Type::kString, str); }
 
   static Token eof()            { return Token(Token::Type::kEOF); }
 };
 
-std::ostream& operator<<(std::ostream& os, const Token& token);
+std::ostream& operator<<(std::ostream& os, Token const& token);
 
 } // namespace expr
 

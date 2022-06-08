@@ -25,7 +25,7 @@
 
 namespace expr {
 
-typedef std::function<Value(const std::vector<Value>&)> ScriptFunction;
+typedef std::function<Value(std::vector<Value> const&)> ScriptFunction;
 
 class Environment
 {
@@ -38,15 +38,15 @@ private:
 public:
   Environment();
 
-  void bind_variable(const std::string& name, const Value& value);
-  void bind_function(const std::string& name, const ScriptFunction& value);
+  void bind_variable(std::string const& name, Value const& value);
+  void bind_function(std::string const& name, ScriptFunction const& value);
 
-  Value lookup_variable(const std::string& name) const;
-  ScriptFunction lookup_function(const std::string& name) const;
+  Value lookup_variable(std::string const& name) const;
+  ScriptFunction lookup_function(std::string const& name) const;
 
 private:
-  Environment(const Environment&);
-  Environment& operator=(const Environment&);
+  Environment(Environment const&);
+  Environment& operator=(Environment const&);
 };
 
 } // namespace expr

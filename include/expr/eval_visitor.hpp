@@ -30,39 +30,39 @@ class EvalVisitor : public Visitor
 {
 private:
   std::vector<Value> m_stack;
-  const Environment& m_env;
+  Environment const& m_env;
 
 public:
-  EvalVisitor(const Environment& env);
+  EvalVisitor(Environment const& env);
 
   Value get_result() const;
 
-  void visit(const Plus& node) override;
-  void visit(const Minus& node) override;
-  void visit(const Mult& node) override;
-  void visit(const Div& node) override;
-  void visit(const Modulo& node) override;
-  void visit(const LogicalAND& node) override;
-  void visit(const LogicalOR& node) override;
-  void visit(const BitwiseAND& node) override;
-  void visit(const BitwiseXOR& node) override;
-  void visit(const BitwiseOR& node) override;
-  void visit(const Equal& node) override;
-  void visit(const NotEqual& node) override;
-  void visit(const LargerThen& node) override;
-  void visit(const SmallerThen& node) override;
-  void visit(const SmallerOrEqualThen& node) override;
-  void visit(const LargerOrEqualThen& node) override;
-  void visit(const ShiftLeft& node) override;
-  void visit(const ShiftRight& node) override;
-  void visit(const LogicalNOT& node) override;
-  void visit(const BitwiseNOT& node) override;
-  void visit(const Condition& node) override;
-  void visit(const Negate& node) override;
-  void visit(const Function& node) override;
-  void visit(const Variable& node) override;
-  void visit(const Integer& node) override;
-  void visit(const Real& node) override;
+  void visit(Plus const& node) override;
+  void visit(Minus const& node) override;
+  void visit(Mult const& node) override;
+  void visit(Div const& node) override;
+  void visit(Modulo const& node) override;
+  void visit(LogicalAND const& node) override;
+  void visit(LogicalOR const& node) override;
+  void visit(BitwiseAND const& node) override;
+  void visit(BitwiseXOR const& node) override;
+  void visit(BitwiseOR const& node) override;
+  void visit(Equal const& node) override;
+  void visit(NotEqual const& node) override;
+  void visit(LargerThen const& node) override;
+  void visit(SmallerThen const& node) override;
+  void visit(SmallerOrEqualThen const& node) override;
+  void visit(LargerOrEqualThen const& node) override;
+  void visit(ShiftLeft const& node) override;
+  void visit(ShiftRight const& node) override;
+  void visit(LogicalNOT const& node) override;
+  void visit(BitwiseNOT const& node) override;
+  void visit(Condition const& node) override;
+  void visit(Negate const& node) override;
+  void visit(Function const& node) override;
+  void visit(Variable const& node) override;
+  void visit(Integer const& node) override;
+  void visit(Real const& node) override;
 };
 
 } // namespace expr

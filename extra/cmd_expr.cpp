@@ -28,7 +28,7 @@
 
 namespace expr {
 
-Value script_sin(const std::vector<Value>& args)
+Value script_sin(std::vector<Value> const& args)
 {
   if (args.size() != 1)
   {
@@ -40,7 +40,7 @@ Value script_sin(const std::vector<Value>& args)
   }
 }
 
-Value script_sqrt(const std::vector<Value>& args)
+Value script_sqrt(std::vector<Value> const& args)
 {
   if (args.size() != 1)
   {
@@ -52,7 +52,7 @@ Value script_sqrt(const std::vector<Value>& args)
   }
 }
 
-Value script_cos(const std::vector<Value>& args)
+Value script_cos(std::vector<Value> const& args)
 {
   if (args.size() != 1)
   {
@@ -110,7 +110,7 @@ int run(int argc, char** argv)
         std::cout << "EvalVisitor: " << eval_visitor.get_result() << std::endl;
       }
     }
-    catch(const std::exception& err)
+    catch(std::exception const& err)
     {
       std::cerr << "error: " << err.what() << std::endl;
       return EXIT_FAILURE;

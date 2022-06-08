@@ -40,7 +40,7 @@ private:
   } m_value;
 
 public:
-  static Value string(const std::string& str) {
+  static Value string(std::string const& str) {
     Value value;
     value.m_type = kString;
     value.m_value.string = new std::string(str);
@@ -68,7 +68,7 @@ private:
   {}
 
 public:
-  Value(const Value& rhs) :
+  Value(Value const& rhs) :
     m_type(rhs.m_type),
     m_value(rhs.m_value)
   {
@@ -78,7 +78,7 @@ public:
     }
   }
 
-  Value& operator=(const Value& rhs)
+  Value& operator=(Value const& rhs)
   {
     if (this != &rhs)
     {
@@ -143,31 +143,31 @@ public:
 
   Value operator-() const;
 
-  Value operator+(const Value& rhs) const;
-  Value operator-(const Value& rhs) const;
+  Value operator+(Value const& rhs) const;
+  Value operator-(Value const& rhs) const;
 
-  Value operator*(const Value& rhs) const;
-  Value operator/(const Value& rhs) const;
-  Value operator%(const Value& rhs) const;
+  Value operator*(Value const& rhs) const;
+  Value operator/(Value const& rhs) const;
+  Value operator%(Value const& rhs) const;
 
-  Value operator<<(const Value& rhs) const;
-  Value operator>>(const Value& rhs) const;
+  Value operator<<(Value const& rhs) const;
+  Value operator>>(Value const& rhs) const;
 
-  Value operator<(const Value& rhs) const;
-  Value operator>(const Value& rhs) const;
+  Value operator<(Value const& rhs) const;
+  Value operator>(Value const& rhs) const;
 
-  Value operator<=(const Value& rhs) const;
-  Value operator>=(const Value& rhs) const;
+  Value operator<=(Value const& rhs) const;
+  Value operator>=(Value const& rhs) const;
 
-  Value operator==(const Value& rhs) const;
-  Value operator!=(const Value& rhs) const;
+  Value operator==(Value const& rhs) const;
+  Value operator!=(Value const& rhs) const;
 
-  Value logical_and(const Value& rhs) const;
-  Value logical_or(const Value& rhs) const;
+  Value logical_and(Value const& rhs) const;
+  Value logical_or(Value const& rhs) const;
 
-  Value operator&(const Value& rhs) const;
-  Value operator^(const Value& rhs) const;
-  Value operator|(const Value& rhs) const;
+  Value operator&(Value const& rhs) const;
+  Value operator^(Value const& rhs) const;
+  Value operator|(Value const& rhs) const;
 
   Value operator~() const;
   Value operator!() const;
@@ -175,7 +175,7 @@ public:
   explicit operator bool() const;
 };
 
-std::ostream& operator<<(std::ostream& os, const Value& value);
+std::ostream& operator<<(std::ostream& os, Value const& value);
 
 } // namespace expr
 

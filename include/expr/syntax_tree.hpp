@@ -42,7 +42,7 @@ protected:
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  const Expr& get_rhs() const { return *m_rhs; }
+  Expr const& get_rhs() const { return *m_rhs; }
 
   UnaryOp(std::unique_ptr<Expr>&& rhs) :
     m_rhs(std::move(rhs))
@@ -56,8 +56,8 @@ protected:
   std::unique_ptr<Expr> m_rhs;
 
 public:
-  const Expr& get_lhs() const { return *m_lhs; }
-  const Expr& get_rhs() const { return *m_rhs; }
+  Expr const& get_lhs() const { return *m_lhs; }
+  Expr const& get_rhs() const { return *m_rhs; }
 
   BinaryOp(std::unique_ptr<Expr>&& lhs, std::unique_ptr<Expr>&& rhs) :
     m_lhs(std::move(lhs)),
@@ -298,9 +298,9 @@ public:
     m_rhs(std::move(rhs))
   {}
 
-  const Expr& get_expr() const { return *m_expr; }
-  const Expr& get_lhs() const { return *m_lhs; }
-  const Expr& get_rhs() const { return *m_rhs; }
+  Expr const& get_expr() const { return *m_expr; }
+  Expr const& get_lhs() const { return *m_lhs; }
+  Expr const& get_rhs() const { return *m_rhs; }
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
@@ -313,7 +313,7 @@ private:
   std::vector<std::unique_ptr<Expr> > m_args;
 
 public:
-  Function(const std::string& name, std::vector<std::unique_ptr<Expr> >&& args) :
+  Function(std::string const& name, std::vector<std::unique_ptr<Expr> >&& args) :
     m_name(name),
     m_args(std::move(args))
   {}
@@ -330,7 +330,7 @@ private:
   std::string m_name;
 
 public:
-  Variable(const std::string& name) :
+  Variable(std::string const& name) :
     m_name(name)
   {}
 

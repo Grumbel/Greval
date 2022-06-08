@@ -25,19 +25,19 @@ Environment::Environment() :
 }
 
 void
-Environment::bind_variable(const std::string& name, const Value& value)
+Environment::bind_variable(std::string const& name, Value const& value)
 {
   m_variables.insert(std::pair<std::string, Value>(name, value));
 }
 
 void
-Environment::bind_function(const std::string& name, const ScriptFunction& func)
+Environment::bind_function(std::string const& name, ScriptFunction const& func)
 {
   m_functions.insert(std::pair<std::string, ScriptFunction>(name, func));
 }
 
 Value
-Environment::lookup_variable(const std::string& name) const
+Environment::lookup_variable(std::string const& name) const
 {
   Variables::const_iterator it = m_variables.find(name);
   if (it == m_variables.end())
@@ -51,7 +51,7 @@ Environment::lookup_variable(const std::string& name) const
 }
 
 ScriptFunction
-Environment::lookup_function(const std::string& name) const
+Environment::lookup_function(std::string const& name) const
 {
   Functions::const_iterator it = m_functions.find(name);
   if (it == m_functions.end())

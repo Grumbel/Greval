@@ -22,7 +22,7 @@
 
 namespace expr {
 
-Lexer::Lexer(const std::string& str) :
+Lexer::Lexer(std::string const& str) :
   m_string(str),
   m_pos(0)
 {
@@ -48,7 +48,7 @@ Lexer::unget_char()
   m_pos -= 1;
 }
 
-const char*
+char const*
 Lexer::get_ptr()
 {
   return &*m_string.begin() + m_pos;

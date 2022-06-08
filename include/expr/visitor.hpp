@@ -52,32 +52,32 @@ class Visitor
 public:
   virtual ~Visitor() {}
 
-  virtual void visit(const Plus& node) = 0;
-  virtual void visit(const Minus& node) = 0;
-  virtual void visit(const Mult& node) = 0;
-  virtual void visit(const Div& node) = 0;
-  virtual void visit(const Modulo& node) = 0;
-  virtual void visit(const LogicalAND& node) = 0;
-  virtual void visit(const LogicalOR& node) = 0;
-  virtual void visit(const BitwiseAND& node) = 0;
-  virtual void visit(const BitwiseXOR& node) = 0;
-  virtual void visit(const BitwiseOR& node) = 0;
-  virtual void visit(const Equal& node) = 0;
-  virtual void visit(const NotEqual& node) = 0;
-  virtual void visit(const LargerThen& node) = 0;
-  virtual void visit(const SmallerThen& node) = 0;
-  virtual void visit(const SmallerOrEqualThen& node) = 0;
-  virtual void visit(const LargerOrEqualThen& node) = 0;
-  virtual void visit(const ShiftLeft& node) = 0;
-  virtual void visit(const ShiftRight& node) = 0;
-  virtual void visit(const LogicalNOT& node) = 0;
-  virtual void visit(const BitwiseNOT& node) = 0;
-  virtual void visit(const Condition& node) = 0;
-  virtual void visit(const Negate& node) = 0;
-  virtual void visit(const Function& node) = 0;
-  virtual void visit(const Variable& node) = 0;
-  virtual void visit(const Integer& node) = 0;
-  virtual void visit(const Real& node) = 0;
+  virtual void visit(Plus const& node) = 0;
+  virtual void visit(Minus const& node) = 0;
+  virtual void visit(Mult const& node) = 0;
+  virtual void visit(Div const& node) = 0;
+  virtual void visit(Modulo const& node) = 0;
+  virtual void visit(LogicalAND const& node) = 0;
+  virtual void visit(LogicalOR const& node) = 0;
+  virtual void visit(BitwiseAND const& node) = 0;
+  virtual void visit(BitwiseXOR const& node) = 0;
+  virtual void visit(BitwiseOR const& node) = 0;
+  virtual void visit(Equal const& node) = 0;
+  virtual void visit(NotEqual const& node) = 0;
+  virtual void visit(LargerThen const& node) = 0;
+  virtual void visit(SmallerThen const& node) = 0;
+  virtual void visit(SmallerOrEqualThen const& node) = 0;
+  virtual void visit(LargerOrEqualThen const& node) = 0;
+  virtual void visit(ShiftLeft const& node) = 0;
+  virtual void visit(ShiftRight const& node) = 0;
+  virtual void visit(LogicalNOT const& node) = 0;
+  virtual void visit(BitwiseNOT const& node) = 0;
+  virtual void visit(Condition const& node) = 0;
+  virtual void visit(Negate const& node) = 0;
+  virtual void visit(Function const& node) = 0;
+  virtual void visit(Variable const& node) = 0;
+  virtual void visit(Integer const& node) = 0;
+  virtual void visit(Real const& node) = 0;
 };
 
 } // namespace expr

@@ -21,7 +21,7 @@
 
 namespace expr {
 
-std::ostream& operator<<(std::ostream& os, const Token& token)
+std::ostream& operator<<(std::ostream& os, Token const& token)
 {
   token.print(os);
   return os;
