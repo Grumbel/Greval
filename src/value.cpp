@@ -20,6 +20,8 @@
 
 #include "value.hpp"
 
+namespace expr {
+
 void
 Value::print(std::ostream& os) const
 {
@@ -287,5 +289,7 @@ Value::operator-() const
 
   return Value();
 }
+
+} // namespace expr
 
 /* EOF */

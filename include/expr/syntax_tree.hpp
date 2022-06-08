@@ -25,6 +25,8 @@
 #include "environment.hpp"
 #include "visitor.hpp"
 
+namespace expr {
+
 class Visitor;
 
 class Expr
@@ -112,7 +114,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class LogicalAND : public BinaryOp
 {
 public:
@@ -133,7 +136,8 @@ public:
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
 
-
+
+
 class BitwiseAND : public BinaryOp
 {
 public:
@@ -163,7 +167,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class Equal : public BinaryOp
 {
 public:
@@ -183,7 +188,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class LargerThen : public BinaryOp
 {
 public:
@@ -224,7 +230,8 @@ public:
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
 
-
+
+
 class ShiftLeft : public BinaryOp
 {
 public:
@@ -244,7 +251,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class LogicalNOT : public UnaryOp
 {
 public:
@@ -274,7 +282,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class Condition : public Expr
 {
 private:
@@ -295,7 +304,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class Function : public Expr
 {
 private:
@@ -328,7 +338,8 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
 class Integer : public Expr
 {
   int m_value;
@@ -356,7 +367,10 @@ public:
 
   void accept(Visitor& visitor) const override { visitor.visit(*this); }
 };
-
+
+
+} // namespace expr
+
 #endif
 
 /* EOF */

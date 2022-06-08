@@ -19,6 +19,8 @@
 
 #include "token.hpp"
 
+namespace expr {
+
 std::ostream& operator<<(std::ostream& os, const Token& token)
 {
   token.print(os);
@@ -61,5 +63,7 @@ Token::print(std::ostream& os) const
     case Token::Type::kComma:  os << ","; break;
   }
 }
+
+} // namespace expr
 
 /* EOF */

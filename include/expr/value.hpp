@@ -20,6 +20,8 @@
 #include <iosfwd>
 #include <stdexcept>
 
+namespace expr {
+
 class Value
 {
 public:
@@ -174,6 +176,8 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& os, const Value& value);
+
+} // namespace expr
 
 #endif
 

@@ -20,6 +20,8 @@
 
 #include "lexer.hpp"
 
+namespace expr {
+
 Lexer::Lexer(const std::string& str) :
   m_string(str),
   m_pos(0)
@@ -271,5 +273,7 @@ Lexer::is_eof() const
 {
   return m_pos == m_string.size();
 }
+
+} // namespace expr
 
 /* EOF */

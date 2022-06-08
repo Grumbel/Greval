@@ -21,6 +21,8 @@
 
 #include "visitor.hpp"
 
+namespace expr {
+
 class PrintVisitor : public Visitor
 {
 private:
@@ -56,6 +58,8 @@ public:
   void visit(const Integer& node) override;
   void visit(const Real& node) override;
 };
+
+} // namespace expr
 
 #endif
 

@@ -17,6 +17,8 @@
 #ifndef HEADER_VISITOR_HPP
 #define HEADER_VISITOR_HPP
 
+namespace expr {
+
 class Expr;
 class Plus;
 class Minus;
@@ -77,6 +79,8 @@ public:
   virtual void visit(const Integer& node) = 0;
   virtual void visit(const Real& node) = 0;
 };
+
+} // namespace expr
 
 #endif
 

@@ -16,6 +16,8 @@
 
 #include "environment.hpp"
 
+namespace expr {
+
 Environment::Environment() :
   m_functions(),
   m_variables()
@@ -61,5 +63,7 @@ Environment::lookup_function(const std::string& name) const
     return it->second;
   }
 }
+
+} // namespace expr
 
 /* EOF */

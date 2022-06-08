@@ -17,9 +17,11 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "lexer.hpp"
+#include <expr/lexer.hpp>
 
-int main(int argc, char** argv)
+namespace expr {
+
+int lexer_run(int argc, char** argv)
 {
   if (argc != 2)
   {
@@ -43,6 +45,13 @@ int main(int argc, char** argv)
       return EXIT_FAILURE;
     }
   }
+}
+
+} // namespace expr
+
+int main(int argc, char** argv)
+{
+  return expr::lexer_run(argc, argv);
 }
 
 /* EOF */

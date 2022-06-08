@@ -20,6 +20,8 @@
 
 #include "syntax_tree.hpp"
 
+namespace expr {
+
 PrintVisitor::PrintVisitor(std::ostream& os) :
   m_os(os)
 {
@@ -269,5 +271,7 @@ PrintVisitor::visit(const Real& node)
 {
   m_os << node.get_value();
 }
+
+} // namespace expr
 
 /* EOF */

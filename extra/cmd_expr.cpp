@@ -20,11 +20,13 @@
 #include <sstream>
 #include <memory>
 
-#include "eval_visitor.hpp"
-#include "print_visitor.hpp"
-#include "lexer.hpp"
-#include "parser.hpp"
-#include "syntax_tree.hpp"
+#include <expr/eval_visitor.hpp>
+#include <expr/print_visitor.hpp>
+#include <expr/lexer.hpp>
+#include <expr/parser.hpp>
+#include <expr/syntax_tree.hpp>
+
+namespace expr {
 
 Value script_sin(const std::vector<Value>& args)
 {
@@ -62,7 +64,7 @@ Value script_cos(const std::vector<Value>& args)
   }
 }
 
-int main(int argc, char** argv)
+int run(int argc, char** argv)
 {
   if (argc < 2)
   {
@@ -116,6 +118,13 @@ int main(int argc, char** argv)
 
     return EXIT_SUCCESS;
   }
+}
+
+} // namespace expr
+
+int main(int argc, char** argv)
+{
+  return expr::run(argc, argv);
 }
 
 /* EOF */

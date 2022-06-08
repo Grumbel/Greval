@@ -23,6 +23,8 @@
 
 #include "value.hpp"
 
+namespace expr {
+
 typedef std::function<Value(const std::vector<Value>&)> ScriptFunction;
 
 class Environment
@@ -46,6 +48,8 @@ private:
   Environment(const Environment&);
   Environment& operator=(const Environment&);
 };
+
+} // namespace expr
 
 #endif
 

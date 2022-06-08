@@ -19,6 +19,8 @@
 
 #include <iosfwd>
 
+namespace expr {
+
 class Token
 {
 public:
@@ -178,6 +180,8 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& os, const Token& token);
+
+} // namespace expr
 
 #endif
 

@@ -22,6 +22,8 @@
 #include "value.hpp"
 #include "visitor.hpp"
 
+namespace expr {
+
 class Environment;
 
 class EvalVisitor : public Visitor
@@ -62,6 +64,8 @@ public:
   void visit(const Integer& node) override;
   void visit(const Real& node) override;
 };
+
+} // namespace expr
 
 #endif
 

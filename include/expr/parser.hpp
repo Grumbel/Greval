@@ -21,6 +21,8 @@
 
 #include "lexer.hpp"
 
+namespace expr {
+
 class Expr;
 
 class Parser
@@ -60,6 +62,8 @@ private:
   Parser(const Parser&);
   Parser& operator=(const Parser&);
 };
+
+} // namespace expr
 
 #endif
 

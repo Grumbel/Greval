@@ -23,6 +23,8 @@
 
 #include "parser.hpp"
 
+namespace expr {
+
 Parser::Parser(Lexer& lexer) :
   m_lexer(lexer),
   m_tokens()
@@ -435,5 +437,7 @@ Parser::next_token()
     m_tokens.push_back(m_lexer.get_token());
   }
 }
+
+} // namespace expr
 
 /* EOF */

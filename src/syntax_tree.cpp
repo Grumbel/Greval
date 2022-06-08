@@ -16,4 +16,8 @@
 
 #include "syntax_tree.hpp"
 
+namespace expr {
+
+} // namespace expr
+
 /* EOF */

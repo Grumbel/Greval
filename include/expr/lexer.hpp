@@ -21,6 +21,8 @@
 
 #include "token.hpp"
 
+namespace expr {
+
 class Lexer
 {
 private:
@@ -43,6 +45,8 @@ private:
   Lexer(const Lexer&);
   Lexer& operator=(const Lexer&);
 };
+
+} // namespace expr
 
 #endif
 

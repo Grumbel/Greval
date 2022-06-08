@@ -21,6 +21,8 @@
 #include "environment.hpp"
 #include "syntax_tree.hpp"
 
+namespace expr {
+
 EvalVisitor::EvalVisitor(const Environment& env) :
   m_stack(),
   m_env(env)
@@ -247,5 +249,7 @@ EvalVisitor::visit(const Real& node)
 {
   m_stack.push_back(Value::real(node.get_value()));
 }
+
+} // namespace expr
 
 /* EOF */
