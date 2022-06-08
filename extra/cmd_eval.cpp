@@ -64,7 +64,7 @@ Value script_cos(std::vector<Value> const& args)
   }
 }
 
-int run(int argc, char** argv)
+int eval_run(int argc, char** argv)
 {
   if (argc < 2)
   {
@@ -124,7 +124,7 @@ int run(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-  return expr::run(argc, argv);
+  return expr::eval_run(argc, argv);
 }
 
 /* EOF */
