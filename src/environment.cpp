@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 
 #include "environment.hpp"
 
-namespace expr {
+namespace greval {
 
 Environment::Environment() :
   m_functions(),
@@ -64,6 +64,6 @@ Environment::lookup_function(std::string const& name) const
   }
 }
 
-} // namespace expr
+} // namespace greval
 
 /* EOF */

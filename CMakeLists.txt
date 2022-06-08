@@ -1,4 +1,4 @@
-# Expr - A simple toy programming language
+# greval - A simple toy programming language
 # Copyright (C) 2015 Ingo Ruhnke <grumbel@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,26 +15,26 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 cmake_minimum_required(VERSION 3.0)
-project(expr VERSION 0.1.0)
+project(greval VERSION 0.1.0)
 
 include(mk/cmake/TinyCMMC.cmake)
 
-# build expr
-file(GLOB EXPR_HEADERS include/expr/*.hpp)
-file(GLOB EXPR_SOURCES src/*.cpp)
-add_library(expr STATIC ${EXPR_SOURCES})
-target_include_directories(expr PUBLIC
+# build greval
+file(GLOB GREVAL_HEADERS include/greval/*.hpp)
+file(GLOB GREVAL_SOURCES src/*.cpp)
+add_library(greval STATIC ${GREVAL_SOURCES})
+target_include_directories(greval PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/expr>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/greval>
   $<INSTALL_INTERFACE:include>)
-target_compile_options(expr PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
-set_target_properties(expr PROPERTIES PUBLIC_HEADER
-  "${EXPR_HEADERS}")
+target_compile_options(greval PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
+set_target_properties(greval PROPERTIES PUBLIC_HEADER
+  "${GREVAL_HEADERS}")
 
 if(BUILD_EXTRA)
-  file(GLOB EXPR_EXTRA_SOURCES_CXX RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+  file(GLOB GREVAL_EXTRA_SOURCES_CXX RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     extra/cmd_*.cpp)
-  foreach(EXTRA_SOURCE ${EXPR_EXTRA_SOURCES_CXX})
+  foreach(EXTRA_SOURCE ${GREVAL_EXTRA_SOURCES_CXX})
     string(REGEX REPLACE ".*/cmd_\([^/]*\).cpp" "\\1" EXTRA_NAME ${EXTRA_SOURCE})
     set(EXTRA_TARGET "extra_${EXTRA_NAME}")
     add_executable(${EXTRA_TARGET} ${EXTRA_SOURCE})
@@ -42,7 +42,7 @@ if(BUILD_EXTRA)
       RUNTIME_OUTPUT_DIRECTORY "extra/"
       OUTPUT_NAME "${PROJECT_NAME}-${EXTRA_NAME}")
     target_compile_options(${EXTRA_TARGET} PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
-    target_link_libraries(${EXTRA_TARGET} PRIVATE expr)
+    target_link_libraries(${EXTRA_TARGET} PRIVATE greval)
 
     install(TARGETS ${EXTRA_TARGET})
   endforeach(EXTRA_SOURCE)
@@ -52,15 +52,15 @@ if(BUILD_TESTS)
   find_package(GTest REQUIRED)
 
   # build test cases
-  file(GLOB TEST_EXPR_SOURCES test/*_test.cpp)
-  add_executable(test_expr ${TEST_EXPR_SOURCES})
-  target_compile_options(test_expr PRIVATE ${WARNINGS_CXX_FLAGS})
-  target_link_libraries(test_expr
+  file(GLOB TEST_GREVAL_SOURCES test/*_test.cpp)
+  add_executable(test_greval ${TEST_GREVAL_SOURCES})
+  target_compile_options(test_greval PRIVATE ${WARNINGS_CXX_FLAGS})
+  target_link_libraries(test_greval
     GTest::GTest
     GTest::Main
-    expr)
+    greval)
 endif()
 
-tinycmmc_export_and_install_library(expr)
+tinycmmc_export_and_install_library(greval)
 
 # EOF #

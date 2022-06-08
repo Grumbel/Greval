@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -20,13 +20,13 @@
 #include <sstream>
 #include <memory>
 
-#include <expr/eval_visitor.hpp>
-#include <expr/print_visitor.hpp>
-#include <expr/lexer.hpp>
-#include <expr/parser.hpp>
-#include <expr/syntax_tree.hpp>
+#include <greval/eval_visitor.hpp>
+#include <greval/print_visitor.hpp>
+#include <greval/lexer.hpp>
+#include <greval/parser.hpp>
+#include <greval/syntax_tree.hpp>
 
-namespace expr {
+namespace greval {
 
 Value script_sin(std::vector<Value> const& args)
 {
@@ -124,7 +124,7 @@ int eval_run(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-  return expr::eval_run(argc, argv);
+  return greval::eval_run(argc, argv);
 }
 
 /* EOF */

@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #include <iosfwd>
 #include <stdexcept>
 
-namespace expr {
+namespace greval {
 
 class Value
 {
@@ -177,7 +177,7 @@ public:
 
 std::ostream& operator<<(std::ostream& os, Value const& value);
 
-} // namespace expr
+} // namespace greval
 
 #endif
 

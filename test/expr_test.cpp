@@ -1,13 +1,13 @@
 #include <memory>
 #include <gtest/gtest.h>
 
-#include <expr/eval_visitor.hpp>
-#include <expr/print_visitor.hpp>
-#include <expr/lexer.hpp>
-#include <expr/parser.hpp>
-#include <expr/syntax_tree.hpp>
+#include <greval/eval_visitor.hpp>
+#include <greval/print_visitor.hpp>
+#include <greval/lexer.hpp>
+#include <greval/parser.hpp>
+#include <greval/syntax_tree.hpp>
 
-using namespace expr;
+using namespace greval;
 
 Value script_plus(const std::vector<Value>& args)
 {

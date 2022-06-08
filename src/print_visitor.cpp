@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 
 #include "syntax_tree.hpp"
 
-namespace expr {
+namespace greval {
 
 PrintVisitor::PrintVisitor(std::ostream& os) :
   m_os(os)
@@ -272,6 +272,6 @@ PrintVisitor::visit(Real const& node)
   m_os << node.get_value();
 }
 
-} // namespace expr
+} // namespace greval
 
 /* EOF */

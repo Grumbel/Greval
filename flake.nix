@@ -14,8 +14,8 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in rec {
         packages = flake-utils.lib.flattenTree {
-          expr = pkgs.stdenv.mkDerivation {
-            pname = "expr";
+          greval = pkgs.stdenv.mkDerivation {
+            pname = "greval";
             version = tinycmmc.lib.versionFromFile self;
             src = nixpkgs.lib.cleanSource ./.;
             cmakeFlags = [
@@ -33,7 +33,7 @@
             ];
           };
         };
-        defaultPackage = packages.expr;
+        defaultPackage = packages.greval;
       }
     );
 }

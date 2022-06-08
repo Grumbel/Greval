@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 #ifndef HEADER_VISITOR_HPP
 #define HEADER_VISITOR_HPP
 
-namespace expr {
+namespace greval {
 
 class Expr;
 class Plus;
@@ -80,7 +80,7 @@ public:
   virtual void visit(Real const& node) = 0;
 };
 
-} // namespace expr
+} // namespace greval
 
 #endif
 

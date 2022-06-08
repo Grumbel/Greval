@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 
 #include "parser.hpp"
 
-namespace expr {
+namespace greval {
 
 Parser::Parser(Lexer& lexer) :
   m_lexer(lexer),
@@ -438,6 +438,6 @@ Parser::next_token()
   }
 }
 
-} // namespace expr
+} // namespace greval
 
 /* EOF */

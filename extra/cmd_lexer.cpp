@@ -1,4 +1,4 @@
-// Expr - A simple toy programming language
+// Greval - A simple toy programming language
 // Copyright (C) 2011 Ingo Ruhnke <grumbel@gmail.com>
 //
 // This program is free software: you can redistribute it and/or modify
@@ -17,9 +17,9 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include <expr/lexer.hpp>
+#include <greval/lexer.hpp>
 
-namespace expr {
+namespace greval {
 
 int lexer_run(int argc, char** argv)
 {
@@ -47,11 +47,11 @@ int lexer_run(int argc, char** argv)
   }
 }
 
-} // namespace expr
+} // namespace greval
 
 int main(int argc, char** argv)
 {
-  return expr::lexer_run(argc, argv);
+  return greval::lexer_run(argc, argv);
 }
 
 /* EOF */
