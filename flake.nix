@@ -19,6 +19,7 @@
             version = tinycmmc.lib.versionFromFile self;
             src = nixpkgs.lib.cleanSource ./.;
             cmakeFlags = [
+              "-DBUILD_EXTRA=ON"
               "-DWARNINGS=ON"
               "-DWERROR=ON"
             ];

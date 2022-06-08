@@ -21,29 +21,32 @@ include(mk/cmake/TinyCMMC.cmake)
 
 # build expr
 file(GLOB EXPR_HEADERS include/expr/*.hpp)
-add_library(expr STATIC
-  src/lexer.cpp
-  src/parser.cpp
-  src/token.cpp
-  src/value.cpp
-  src/environment.cpp
-  src/print_visitor.cpp
-  src/eval_visitor.cpp)
+file(GLOB EXPR_SOURCES src/*.cpp)
+add_library(expr STATIC ${EXPR_SOURCES})
 target_include_directories(expr PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/expr>
   $<INSTALL_INTERFACE:include>)
 target_compile_options(expr PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
 set_target_properties(expr PROPERTIES PUBLIC_HEADER
   "${EXPR_HEADERS}")
 
-add_executable(expr_exe
-  src/expr.cpp)
-set_target_properties(expr_exe PROPERTIES OUTPUT_NAME "expr")
-target_link_libraries(expr_exe expr)
-target_compile_options(expr_exe PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
+if(BUILD_EXTRA)
+  file(GLOB EXPR_EXTRA_SOURCES_CXX RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+    extra/cmd_*.cpp)
+  foreach(EXTRA_SOURCE ${EXPR_EXTRA_SOURCES_CXX})
+    string(REGEX REPLACE ".*/cmd_\([^/]*\).cpp" "\\1" EXTRA_NAME ${EXTRA_SOURCE})
+    set(EXTRA_TARGET "extra_${EXTRA_NAME}")
+    add_executable(${EXTRA_TARGET} ${EXTRA_SOURCE})
+    set_target_properties(${EXTRA_TARGET} PROPERTIES
+      RUNTIME_OUTPUT_DIRECTORY "extra/"
+      OUTPUT_NAME "${PROJECT_NAME}-${EXTRA_NAME}")
+    target_compile_options(${EXTRA_TARGET} PRIVATE ${TINYCMMC_WARNINGS_CXX_FLAGS})
+    target_link_libraries(${EXTRA_TARGET} PRIVATE expr)
 
-add_executable(lexer_test src/lexer_test.cpp)
-target_link_libraries(lexer_test expr)
+    install(TARGETS ${EXTRA_TARGET})
+  endforeach(EXTRA_SOURCE)
+endif()
 
 if(BUILD_TESTS)
   find_package(GTest REQUIRED)
@@ -53,11 +56,11 @@ if(BUILD_TESTS)
   add_executable(test_expr ${TEST_EXPR_SOURCES})
   target_compile_options(test_expr PRIVATE ${WARNINGS_CXX_FLAGS})
   target_link_libraries(test_expr
-    GTest::GTest GTest::Main
+    GTest::GTest
+    GTest::Main
     expr)
 endif()
 
-install(TARGETS expr_exe)
 tinycmmc_export_and_install_library(expr)
 
 # EOF #
