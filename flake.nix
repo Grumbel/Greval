@@ -13,7 +13,9 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in rec {
-        packages = flake-utils.lib.flattenTree {
+        packages = rec {
+          default = greval;
+
           greval = pkgs.stdenv.mkDerivation {
             pname = "greval";
             version = tinycmmc.lib.versionFromFile self;
@@ -29,11 +31,10 @@
             buildInputs = with pkgs; [
               gtest
             ] ++ [
-              tinycmmc.defaultPackage.${system}
+              tinycmmc.packages.${system}.default
             ];
           };
         };
-        defaultPackage = packages.greval;
       }
     );
 }
