@@ -16,22 +16,32 @@
         packages = rec {
           default = greval;
 
-          greval = pkgs.stdenv.mkDerivation {
+          greval = pkgs.stdenv.mkDerivation rec {
             pname = "greval";
             version = tinycmmc.lib.versionFromFile self;
-            src = nixpkgs.lib.cleanSource ./.;
+
+            src = ./.;
+
+            doCheck = true;
+
             cmakeFlags = [
               "-DBUILD_EXTRA=ON"
               "-DWARNINGS=ON"
               "-DWERROR=ON"
-            ];
+            ] ++ (pkgs.lib.optionals doCheck [
+              "-DBUILD_TESTS=ON"
+            ]);
+
             nativeBuildInputs = with pkgs; [
               cmake
             ];
+
             buildInputs = with pkgs; [
-              gtest
-            ] ++ [
               tinycmmc.packages.${system}.default
+            ];
+
+            checkInputs = with pkgs; [
+              gtest
             ];
           };
         };

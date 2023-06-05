@@ -19,6 +19,11 @@ project(greval VERSION 0.1.0)
 
 include(mk/cmake/TinyCMMC.cmake)
 
+if (BUILD_TESTS)
+  # add 'make test' target, use 'make test ARGS="-V"' or 'ctest -V' for verbose
+  enable_testing()
+endif(BUILD_TESTS)
+
 # build greval
 file(GLOB GREVAL_HEADERS include/greval/*.hpp)
 file(GLOB GREVAL_SOURCES src/*.cpp)
@@ -59,6 +64,10 @@ if(BUILD_TESTS)
     GTest::GTest
     GTest::Main
     greval)
+
+  add_test(NAME test_greval
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMAND test_greval)
 endif()
 
 tinycmmc_export_and_install_library(greval)
