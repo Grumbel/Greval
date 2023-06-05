@@ -35,6 +35,20 @@
             ];
           };
         };
+
+        apps = rec {
+          default = greval-eval;
+
+          greval-eval = flake-utils.lib.mkApp {
+            drv = packages.greval;
+            exePath = "/bin/greval-eval";
+          };
+
+          greval-lexer = flake-utils.lib.mkApp {
+            drv = packages.greval;
+            exePath = "/bin/greval-lexer";
+          };
+        };
       }
     );
 }
